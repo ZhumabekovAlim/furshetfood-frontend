@@ -13,7 +13,7 @@ import { banners } from "../constants/URLs";
 const Banner = () => {
   const [slides, setSlides] = useState([]);
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(slides.length);
   const [slide, setSlide] = useState(true);
   const setIntervalRef = useRef(null);
   const [startX, setStartX] = useState(0);
@@ -59,7 +59,7 @@ const Banner = () => {
       })
       .catch((e) => console.log("Error while fetching banners img", e));
 
-    if (slide) {
+    if (slide.length) {
       setIntervalRef.current = setInterval(nextSlide, 4500);
     } else {
       clearInterval(setIntervalRef.current);

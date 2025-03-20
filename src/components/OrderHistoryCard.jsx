@@ -29,11 +29,11 @@ function OrderHistoryCard({ userHistory }) {
                     <div className="food_item">
                       <div className="food-left">
                         <div className="food_img">
-                          <img src={item.food_item.image_path} alt={item.food_item.name_ru} />
+                          <img src={item.item.image} alt={item.item.name} />
                         </div>
                         <div className="food_mddl">
-                          <div className="food_ttl">{item.food_item.name_ru}</div>
-                          <div className="food_desc">{item.food_item.description_ru}</div>
+                          <div className="food_ttl">{item.item.name}</div>
+                          <div className="food_desc">{item.item.description}</div>
                         </div>
                       </div>
                       <div className="food_price">{Math.round(item.price)} ₸</div>

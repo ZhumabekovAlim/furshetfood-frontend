@@ -35,7 +35,7 @@ const Cart = () => {
   const [isCommentOpen, setIsCommentOpen] = useState(false);
   const [orderComment, setOrderComment] = useState("");
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
-  const [paymentType, setPaymentType] = useState("Наличными при получений");
+  const [paymentType, setPaymentType] = useState("100% предоплата картой");
 
   const [cartItems, setCartItems] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -111,14 +111,6 @@ const Cart = () => {
     dispatch(setMethod(method));
   }
 
-  // const truncateText = (text, wordLimit) => {
-  //   const words = text.split(" ");
-  //   if (words.length > wordLimit) {
-  //     return words.slice(0, wordLimit).join(" ") + "...";
-  //   }
-  //   return text;
-  // };
-
   return (
     <>
       {cartLoading && <LoadingModal />}
@@ -156,9 +148,6 @@ const Cart = () => {
                     <img src={item.image} alt={item.name} />
                   </div>
                   <div className="item_ttl">{item.name}</div>
-                  {/* <div className="item_desc">
-                    {truncateText(item.description, 8)}
-                  </div> */}
                   <div className="item_price">{item.price}</div>
                 </div>
               ))}
@@ -273,8 +262,8 @@ const Cart = () => {
               <span></span>
               {isPaymentOpen && (
                 <div className="order_payment_select">
-                  <div className="order_payment_option" onClick={() => setPaymentTypeFunc("Наличными при получении")}>Наличными при получении</div>
-                  <div className="order_payment_option" onClick={() => setPaymentTypeFunc("Картой")}>Картой</div>
+                  <div className="order_payment_option" onClick={() => setPaymentTypeFunc("50% предоплата картой")}>50% предоплата картой</div>
+                  <div className="order_payment_option" onClick={() => setPaymentTypeFunc("100% предоплата картой")}>100% предоплата картой</div>
                 </div>
               )}
             </div>

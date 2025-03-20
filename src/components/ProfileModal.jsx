@@ -178,7 +178,6 @@ const ProfileModal = () => {
                                             <Field
                                                 name="userEmail"
                                                 type="tel"
-                                                maxLength="20"
                                                 className="profile_input"
                                             />
                                             <ErrorMessage

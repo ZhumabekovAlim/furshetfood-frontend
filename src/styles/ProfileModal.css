@@ -168,6 +168,20 @@
     font-size: 15px;
 }
 
+@media (max-width: 1440px) and (min-width: 1024px) {
+    .profile_modal_wrapper {
+        top: 75px;
+        right: 188px;   
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+    .profile_modal_wrapper {
+        top: 75px;
+        right: 158px;   
+    }
+}
+
 @media (max-width: 768px) {
     .profile_modal {
         display: flex;

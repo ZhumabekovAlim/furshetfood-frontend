@@ -85,6 +85,7 @@ function FoodInfoModal() {
                     <div className="food_info_img"><img src={dataInfo.image_path} alt={dataInfo.name}/></div>
                     <div className="food_info__info">
                         <div className="food_info_ttl">{dataInfo.name}</div>
+                        <div className="food_info_weight">{dataInfo.weight}</div>
                         <div className="food_info_desc">{dataInfo.description}</div>
                         <div className="food_info_price">{dataInfo.price} тг</div>
                         <div className="button_add_to_basket" onClick={() => handleAddToCart(dataInfo.id, dataInfo.item_type)}>Добавить в корзину </div>

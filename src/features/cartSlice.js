@@ -35,6 +35,7 @@ export const postUserCart = createAsyncThunk(
   'postUserCart',
   async(userCart, {rejectWithValue}) => {
     try {
+      console.log("Ты заказл еду и это отправил!", userCart);
       const response = await axios.post(orders, userCart)
       toast.success("Поздравляю! Вы сделали заказ ожидайте звонка.", {
         position: "top-center", 
@@ -112,6 +113,8 @@ const cartSlice = createSlice({
         })
         .addCase(postUserCart.fulfilled, (state) => {
           state.items = [];
+          state.devices = 1;
+          state.deliveryMethod = "delivery";
           state.isCartLoading = false;
         })
         .addCase(postUserCart.rejected, (state) => {

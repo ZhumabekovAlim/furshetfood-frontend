@@ -17,9 +17,7 @@
     background-color: #fff;
     padding: 50px;
     width: 100vw;
-    height: 100vh;
     max-width: 800px;
-    max-height: 500px;
     position: relative;
     border-radius: 30px;
 }
@@ -112,14 +110,26 @@
     }
 
     .food_info_top {
-        flex-direction: column;
-        gap: 20px;
+        display: flex;
+        gap: 39px;
     }
-
+    
     .food_info_img {
-        height: auto;
-        margin: 0 auto;
+        position: relative;
+        flex: 1 1 auto; 
+        max-width: 390px;
+        height: 192px;  
+        border-radius: 20px;
+        overflow: hidden; 
     }
+    
+    .food_info_img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+        border-radius: inherit;
+    }
+    
 
     .food_info__info {
         text-align: left;
@@ -141,7 +151,7 @@
     }
 
     .button_add_to_basket {
-        font-size: 16px;
+        font-size: 12px;
         padding: 10px 0;
     }
 }
