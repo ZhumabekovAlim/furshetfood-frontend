@@ -1,6 +1,6 @@
 import React from 'react'
 
-import AdvertasmentBanner from '/images/Advert.png';
+import AdvertasmentBanner from '/images/phone.svg';
 import WhatsappIcon from '/Icons/whatsapp.svg';
 import InstagramIcon from '/Icons/instagram.svg';
 import TikTokIcon from '/Icons/tiktok.svg';
@@ -29,7 +29,7 @@ function Adverts() {
                     </div>
                 </div>
                 <h2>Для сотрудничества пишите в WhatsApp</h2>
-                <a href="https://wa.me/77786496622"><button className='whatsapp_btn'><img src={WhatsappButton} alt="" style={{ marginRight: "17px" }}/>Связаться</button></a>
+                <a href="https://wa.me/77786496622"><button className='whatsapp_btn'><img src={WhatsappButton} alt="" style={{ marginRight: "17px" }}/>Связаться<span>&nbsp;с нами</span></button></a>
                 <div className="desc">
                     <span>Заказы принимаются до 21:00.</span> Доставляем в <br/> течение 1,5 часа! Вы можете оплатить заказ <br/> наличными после получения, либо переводом через <br/> Kaspi.
                 </div>
