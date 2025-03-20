@@ -22,10 +22,14 @@ const Banner = () => {
   const { isLoading } = useSelector((state) => state.auth);
 
   const nextSlide = () => {
-    setCurrentIndex((currIndex) =>
-      currIndex === slides.length - 1 ? 0 : currIndex + 1
-    );
+    const nextIndex = currentIndex + 1;
+    if (nextIndex < slides.length) {
+      setCurrentIndex(nextIndex);
+    } else {
+      setCurrentIndex(0);
+    }
   };
+  
 
   const prevSlide = () => {
     setCurrentIndex((currIndex) =>

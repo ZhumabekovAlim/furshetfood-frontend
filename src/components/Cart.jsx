@@ -140,7 +140,7 @@ const Cart = () => {
         <div className="cart_body">
           <div className="cart_added_list">
             {loading ? <div className="loadingCart"><ClipLoader color="#8B0506" size={25}/></div> : cartItems && cartItems.length ? (
-              cartItems.map((item) => <CartAddedItem itmeKey={item.item_id} item={item} />)
+              cartItems.map((item) => <CartAddedItem key={item.item_id} itmeKey={item.item_id} item={item} />)
             ) : (
               <div className="empty_cart">Тут пока пусто</div>
             )}
