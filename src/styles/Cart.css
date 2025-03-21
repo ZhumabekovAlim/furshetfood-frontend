@@ -78,8 +78,10 @@
 
 .cart_added_item img {
     width: 100%;
-    max-width: 95px;
+    max-width: 100px;
+    height: 100px;
     border-radius: 14px;
+    object-fit: cover;
 }
 
 .cart_item_info {
@@ -91,6 +93,7 @@
 }
 
 .cart_item_title {
+    font-size: 0.9em;
     color: #272727;
     font-weight: 600;
 }
@@ -151,7 +154,7 @@ input[type="number"] {
 .line_item {
     background-color: #fff;
     border-radius: 18px;
-    padding: 15px 27px;
+    padding: 10px 27px;
     width: 100%;
     max-width: 66px;
     display: flex;
@@ -166,12 +169,16 @@ input[type="number"] {
 }
 
 .item_img img {
-    width: 100%;
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 14px;
 }
 
 .item_ttl {
     color: #272727;
     font-weight: 500;
+    font-size: .7em;
 }
 
 .item_desc {
@@ -211,6 +218,28 @@ input[type="number"] {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.order-promocode:active,
+.order-promocode:focus-visible,
+.order-promocode:focus {
+    border: none;
+    outline: none;
+}
+
+.order-promocode::placeholder {
+    font-size: 16px;
+    font-weight:500;
+}
+
+.order-promocode {
+    width: 89%;
+    background-color: #F3F3F3;
+    border: none;
+    border-radius: 14px;
+    font-size: 17px;
+    padding: 15px 20px 15px 20px;
+    margin-top: 15px;
 }
 
 .order_wrapper {
@@ -337,10 +366,12 @@ input[type="number"] {
 }
 
 .order_comment_input {
-    padding: 5px 15px 0px 20px;
+    padding: 5px 20px 0px 20px;
 }
 
 .order_comment {
+    background: #F3F3F3;
+    color: #272727;
     resize: none;
     outline: none;
     width: 100%;
@@ -351,7 +382,6 @@ input[type="number"] {
 }
 
 .order_comment::placeholder {
-    color: #272727;
     font-size: 16px;
     font-weight:500;
 }

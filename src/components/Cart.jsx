@@ -145,7 +145,7 @@ const Cart = () => {
               {moreItems.map(item => (
                 <div className="line_item" key={item.id} onClick={() => handleAddToCart(item.id, item.item_type)}>
                   <div className="item_img">
-                    <img src={item.image} alt={item.name} />
+                    <img src={item.image_path} alt={item.name} />
                   </div>
                   <div className="item_ttl">{item.name}</div>
                   <div className="item_price">{item.price}</div>
@@ -259,7 +259,7 @@ const Cart = () => {
                   <img src={option_arrow} alt="Стрелочка для опции заказа" />
                 </div>
               </div>
-              <span></span>
+              {isPaymentOpen && <span></span>}
               {isPaymentOpen && (
                 <div className="order_payment_select">
                   <div className="order_payment_option" onClick={() => setPaymentTypeFunc("50% предоплата картой")}>50% предоплата картой</div>
@@ -268,6 +268,7 @@ const Cart = () => {
               )}
             </div>
           </div>
+
           <div className="detail_total_amount">
             <div className="order_wrapper">
               <div className="order_options">
@@ -302,6 +303,8 @@ const Cart = () => {
               </div>
             </div>}
           </div>
+
+           <input type="text" className="order-promocode" placeholder="Введите промокод" /> 
         </div>
       </div>
           <div className="cart_bottom">

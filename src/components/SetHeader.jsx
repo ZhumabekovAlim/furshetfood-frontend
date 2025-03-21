@@ -19,13 +19,17 @@ const SetHeader = (props) => {
     return (
         <>
             {loading && <SetHedaerSkeleton categoryCount={11} />}
-            {menuHeader.map((item) => (
-                <div className="menuHeader" key={item.id}>
-                    <div className="menu_title">
-                        {item.name}
-                    </div>
-                </div>
-            ))}
+            {menuHeader.map((item) => {
+                if(item.name !== "Другое") {
+                    return(
+                        <div className="menuHeader" key={item.id}>
+                            <div className="menu_title">
+                                {item.name}
+                            </div>
+                        </div>
+                    )
+                }
+            })}
         </>
     )
 }

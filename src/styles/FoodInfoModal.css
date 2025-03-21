@@ -54,6 +54,10 @@
     flex: 1;
 }
 
+.food_info__info .product_item_price-discount {
+    font-size: 21px;
+}
+
 .food_info_ttl {
     margin: 0;
     font-weight: 700;
@@ -72,8 +76,7 @@
     justify-content: end;
     font-size: 21px;
     font-weight: 700;
-    margin-top: 25px;
-    text-decoration: underline;
+    /* text-decoration: underline; */
 }
 
 .button_add_to_basket {

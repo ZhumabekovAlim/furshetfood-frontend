@@ -96,14 +96,12 @@ const cartSlice = createSlice({
     builder
         .addCase(getUserCart.fulfilled, (state, action) => {
           state.items = action.payload;
-          console.log("Cart items: ", state.items);
         })
         .addCase(getUserCart.rejected, (state, action) => {
           state.error = action.payload;
         })
         .addCase(getGuestCart.fulfilled, (state, action) => {
           state.items = action.payload;
-          console.log("Cart items: ", state.items);
         })
         .addCase(getGuestCart.rejected, (state, action) => {
           state.error = action.payload;

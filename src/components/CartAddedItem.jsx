@@ -85,7 +85,7 @@ const CartAddedItem = ({itmeKey, item}) => {
         <img src={detail.image_path} alt="plov" />
         <div className="cart_item_info">
             <div className="cart_item_top">
-                <div className="cart_item_title">{detail.name}</div>
+                <p className="cart_item_title">{detail.name}</p>
                 <div className="cart_item_count">
                     <div className="item_count_minus" onClick={() => cartItemMinus()}>
                         <svg width="14" height="3" viewBox="0 0 14 3" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -101,8 +101,8 @@ const CartAddedItem = ({itmeKey, item}) => {
                 </div>
             </div>
             <div className="cart_item_desc">
-                <div className="cart_item_weight">{detail.description}</div>
-                <div className="cart_item_price">{detail.price * quantity} ₸</div>
+                <div className="cart_item_weight">{detail.weight}</div>
+                <div className="cart_item_price">{(detail.discount_price || detail.regular_price) * quantity} ₸</div>
             </div>
         </div>
     </div>

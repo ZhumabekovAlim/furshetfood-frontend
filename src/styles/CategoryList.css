@@ -17,9 +17,19 @@
     font-size: 16px;
 }
 
+.product_item_price-discount {
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: line-through;
+    text-decoration-color: rgba(139, 5, 6, 0.8);
+    text-decoration-thickness: 2px;
+}
+
+
 .product_item_add_to_busket {
     display: flex;
     align-items: center;
+    padding-top: 5px;
     justify-content: space-between;
 }
 
@@ -57,8 +67,29 @@
 }
 
 .product_item button {
-    background-color: #FAFAFA;
-    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    color: #272727;
+    font-weight: bold;
+    background-color: #FFF1D7;
+    border-radius: 15px;
+}
+
+.product_item_in_cart {
+    display: flex;
+    gap: 10px;
+    background-color: #8B0506;
+    border-radius: 15px;
+
+}
+
+.product_item_in_cart button {
+    background-color: transparent;
+}
+
+.product_item_in_cart span {
+    color: white;    
 }
 
 @media(max-width:1536px) {

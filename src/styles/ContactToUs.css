@@ -4,6 +4,9 @@
 }
 
 .multi_button_social_media {
+    position: fixed;
+    right: 5%;
+    bottom: 50px;
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
