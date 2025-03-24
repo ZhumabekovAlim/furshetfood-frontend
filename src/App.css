@@ -31,7 +31,7 @@
     flex-wrap: wrap;
 }
 
-@media (max-width:425px) {
+@media (max-width:440px) {
     .set_header_line {
         flex-wrap: nowrap;
         overflow-x: auto;

@@ -125,7 +125,7 @@
 }
 
 
-@media (max-width: 425px) and (min-width: 375px) {
+@media (max-width: 430px) and (min-width: 375px) {
     .product_category_block {
         grid-template-columns: 1fr; 
     }

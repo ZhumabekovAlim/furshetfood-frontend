@@ -36,6 +36,7 @@ const Cart = () => {
   const [orderComment, setOrderComment] = useState("");
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [paymentType, setPaymentType] = useState("100% предоплата картой");
+  const [promocode, setPromocode] = useState("");
 
   const [cartItems, setCartItems] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -304,7 +305,7 @@ const Cart = () => {
             </div>}
           </div>
 
-           <input type="text" className="order-promocode" placeholder="Введите промокод" /> 
+           <input type="text" className="order-promocode" placeholder="Введите промокод" value={promocode} onChange={(e) => {setPromocode(e.target.value)}} /> 
         </div>
       </div>
           <div className="cart_bottom">
@@ -314,7 +315,7 @@ const Cart = () => {
             </div>}
             <button 
               className="order_cart_btn" 
-              onClick={() => isAuthenticated ? dispatch(postUserCart({orderComment, paymentType, deliveryMethod, devices})) : dispatch(openSingInModal())}
+              onClick={() => isAuthenticated ? dispatch(postUserCart({orderComment, paymentType, deliveryMethod, devices, promocode})) : dispatch(openSingInModal())}
               disabled={totalAmount ? false : true}
               style={{cursor: totalAmount ? "pointer" : "not-allowed", backgroundColor: totalAmount ? "" : "rgba(139, 5, 6, 0.4)"}}
             >

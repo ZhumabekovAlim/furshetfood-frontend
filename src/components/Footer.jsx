@@ -39,7 +39,6 @@ const Footer = () => {
                     </div>
                     <div className="footer_right">
                         <a href="#">Бонусная система</a>
-                        <a href="#" className="filial">Филиалы</a>
                         <a href="https://wa.me/77752456644">Сотрудничество</a>
                     </div>
                 </div>

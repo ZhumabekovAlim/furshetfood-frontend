@@ -20,7 +20,7 @@
     transform: scale(1.05);
 }
 
-@media (max-width:425px) {
+@media (max-width:440px) {
     .menu_title {
         white-space: nowrap;        
     }
