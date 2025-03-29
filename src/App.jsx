@@ -55,21 +55,25 @@ function App() {
   // Создаём ref для компонента SetHeader (чипсы)
   const headerRef = useRef(null);
 
-  // Отслеживаем появление/исчезновение SetHeader для показа sticky navbar
   useEffect(() => {
-    if (!headerRef.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Когда SetHeader не виден, показываем navbar
-        setShowNavbar(!entry.isIntersecting);
-      },
-      { threshold: 0 }
-    );
-    observer.observe(headerRef.current);
+    const handleScroll = () => {
+      if (!headerRef.current) return;
+  
+      const { top } = headerRef.current.getBoundingClientRect();
+  
+      // Если пользователь проскроллил вниз и прошел мимо блока категорий (top < 0)
+      // Показываем navbar
+      setShowNavbar(top < 0);
+    };
+  
+    handleScroll(); // Проверим сразу при монтировании
+  
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      if (headerRef.current) observer.unobserve(headerRef.current);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  
 
   // Предполагаем, что список категорий можно получить из SetHeader.
   // Для примера будем передавать SetHeader как дочерний элемент и получать его данные.
