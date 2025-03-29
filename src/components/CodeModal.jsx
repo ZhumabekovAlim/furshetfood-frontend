@@ -40,14 +40,12 @@ const CodeModal = () => {
                 };
                 const verifyCode = async () => {
                     try {
-                        console.log("SendedCode: ", sendData)
                         const response = await axios.post(verifyOtp, sendData);
                         setSuccess(true);
                         setTimeout(() => {
                             dispatch(closeSingInModal());
                             dispatch(phoneModal());
                         }, "2000");
-                        console.log(response)
                     } catch (error) {
                         console.log("Ошибка: ", error);
                     }
@@ -70,7 +68,6 @@ const CodeModal = () => {
     const mergingCarts = async () => {
         try {
             const response = await axios.post(cartMerge);
-            console.log("Successfully merged cart: ", response);
         } catch (error) {
             console.log("Error while merging carts: ", error);
         }

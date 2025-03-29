@@ -19,10 +19,13 @@
   }
   
 .set_header_line {
-    margin-top: 25px;
     display: flex;
     flex-wrap: wrap;
     gap: 9px;
+}
+
+.common .category_wrapper h2 {
+    margin-bottom: 0;
 }
 
 .category-items{

@@ -134,7 +134,6 @@ const ProfileModal = () => {
                             initialValues={{ userPhone: userphone || "", userName: userName || "", userDateOfBirth: userBirthday || "", userEmail: userEmail || "", userInstagram: userInstagram || ""}}
                                 validationSchema={validationSchema}
                                 onSubmit={(values) => {
-                                    console.log(values);
                                     dispatch(putNewUserInfo(values));
                                 }}
                             >
@@ -239,7 +238,7 @@ const ProfileModal = () => {
                         </div>
                     </div>
                     <div className="profile_modal_userProfile_body" style={{ overflowY: 'scroll'}}>
-                        {isLoading ? <OrderHistoryCardSkeleton cardCount={6}/> : <OrderHistoryCard userHistory={userHistory}/>}
+                        {isLoading ? <OrderHistoryCardSkeleton cardCount={6}/> : userHistory && <OrderHistoryCard userHistory={userHistory}/>}
                     </div>
                 </div>
                 )}

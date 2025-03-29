@@ -58,7 +58,6 @@ const Banner = () => {
   useEffect(() => {
     axios.get(banners)
       .then((response) => {
-        console.log("Banners: ", response);
         setSlides(response.data);
       })
       .catch((e) => console.log("Error while fetching banners img", e));

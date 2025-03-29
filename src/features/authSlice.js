@@ -10,12 +10,10 @@ export const sendPhoneNumber = createAsyncThunk(
     async(phone, { rejectWithValue }) => {
         try {
             const response = await axios.post(auth, {phone: phone});
-            console.log('Sucess phoneValidation: ', response);
             return phone;
         } catch (error) {
             return rejectWithValue(error.message);
         } finally {
-            console.log({phone: phone});
         }
     }
 );
@@ -25,7 +23,6 @@ export const verifyCode = createAsyncThunk(
     async(sendData, {rejectWithValue}) => {
         try {
             const response = await axios.post(verifyOtp, sendData);
-            console.log("Sucess verifyOtp: ", response);
         } catch (error) {
             return rejectWithValue(error.message)
         }
@@ -37,7 +34,6 @@ export const validateSessionFunc = createAsyncThunk(
     async (_, { rejectWithValue }) => {
         try {
             const response = await axios.get(validateSession);
-            console.log("Success: ", response);
         } catch (error) {
             return rejectWithValue(error.message);
         }
@@ -49,7 +45,6 @@ export const getUserFunc = createAsyncThunk(
     async (_, { rejectWithValue }) => {
         try {
             const response = await axios.get(user)
-            console.log("Success user: ", response);
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response.data);
@@ -69,7 +64,6 @@ export const putNewUserInfo = createAsyncThunk(
         }
         try {
             const response = await axios.post(updateProfile, newUserData);
-            console.log('Successfully changed data: ', response);
             return response.data;
         } catch (error) {
             console.log('Error while posting new user data: ', error);
@@ -85,7 +79,6 @@ export const logout = createAsyncThunk(
         const response = await axios.post(userLogout);
         dispatch(toggleProfile());
         dispatch(validateSessionFunc());
-        console.log("Successfully logout: ", response);
       } catch (error) {
         console.log("Error while logging out: ", error);
       }

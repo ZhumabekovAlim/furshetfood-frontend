@@ -33,21 +33,19 @@ const CartAddedItem = ({itmeKey, item}) => {
   }, [item_id]);
 
   const cartItemPlus = async () => {
-    const url = `${isAuthenticated ? cart : cartGuest}/${item_id}/${item_type}`
+    const url = `${isAuthenticated ? cart : cartGuest}/${item_id}`
 
     if (isAuthenticated) {
         try {
-            const response = await axios.post(url);
+            const response = await axios.put(url);
             dispatch(getUserCart());
-            console.log('Plus cart item: ', response);
         } catch (error) {
             console.log('Erro while adding item: ', error);
         }
     } else {
         try {
-            const response = await axios.post(url);
+            const response = await axios.put(url);
             dispatch(getGuestCart());
-            console.log('Plus cart item: ', response);
         } catch (error) {
             console.log('Erro while adding item: ', error);
         }
@@ -55,13 +53,12 @@ const CartAddedItem = ({itmeKey, item}) => {
   }
 
   const cartItemMinus = async () => {
-    const url = `${isAuthenticated ? cart : cartGuest}/${item_id}/${item_type}`
+    const url = `${isAuthenticated ? cart : cartGuest}/${item_id}`
 
     if (isAuthenticated) {
         try {
             const response = await axios.delete(url);
             dispatch(getUserCart());
-            console.log('Minus cart item: ', response);
         } catch (error) {
             console.log('Erro while removing item: ', error);
         }
@@ -69,7 +66,6 @@ const CartAddedItem = ({itmeKey, item}) => {
         try {
             const response = await axios.delete(url);
             dispatch(getGuestCart());
-            console.log('Minus cart item: ', response);
         } catch (error) {
             console.log('Erro while removing item: ', error);
         }
@@ -80,6 +76,7 @@ const CartAddedItem = ({itmeKey, item}) => {
   if (error) return <div>Ошибка загрузки товара</div>;
   if (!detail) return <div>Данные о товаре не найдены</div>;
 
+  if(detail && detail.name === "Приборы") return null;
   return (
     <div className="cart_added_item" key={itmeKey}>
         <img src={detail.image_path} alt="plov" />

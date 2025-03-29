@@ -116,3 +116,14 @@ h3 {
         max-width: none;
     }
 }
+
+@media (max-width: 420px) {
+    .buttons_container {
+        flex-direction: column; 
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 0;
+    }
+}

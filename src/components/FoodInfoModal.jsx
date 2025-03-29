@@ -37,7 +37,6 @@ function FoodInfoModal() {
     if (isAuthenticated) {
       try {
         const response = await axios.post(cart, addItem);
-        console.log("Success while posting user cart: ", response);
         dispatch(getUserCart());
       } catch (error) {
         console.error("Error adding item to user cart: ", error);
@@ -50,7 +49,6 @@ function FoodInfoModal() {
     } else {
       try {
         const response = await axios.post(cartGuest, addItem);
-        console.log("Success while posting geust cart: ", response);
         dispatch(getGuestCart());
       } catch (error) {
         console.error("Error adding item to guest cart: ", error);

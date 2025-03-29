@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Header from "./components/Header";
 import Banner from "./components/Banner";
 import About from "./components/About";
@@ -23,62 +23,109 @@ import FoodInfoModal from "./components/FoodInfoModal";
 import CartMobileButton from "./components/CartMobileButton";
 import Skeleton from "react-loading-skeleton";
 import CategoriesSkeleton from "./components/CategoriesSkeleton";
+import StickyNavbar from "./components/Navbar";
 
 function App() {
-  const isCartOpen = useSelector((state) => state.cart.isCartOpen)
-  const isSingInOpen = useSelector((state) => state.singIn.isSingInOpen)
-  const {isFoodInfoOpen} = useSelector((state) => state.foodInfo);
-  const { isLoading } = useSelector((state) => state.auth); 
+  const [showNavbar, setShowNavbar] = useState(false);
+  const [activeCategory, setActiveCategory] = useState(null);
+  const isCartOpen = useSelector((state) => state.cart.isCartOpen);
+  const isSingInOpen = useSelector((state) => state.singIn.isSingInOpen);
+  const { isFoodInfoOpen } = useSelector((state) => state.foodInfo);
+  const { isLoading } = useSelector((state) => state.auth);
   const { isOpen } = useSelector((state) => state.profile);
-  
-  isSingInOpen || isOpen ? document.body.style.overflowY = 'hidden' : document.body.style.overflowY = 'auto';
+
+  // Управление прокруткой страницы при открытых модальных окнах
+  isSingInOpen || isOpen
+    ? (document.body.style.overflowY = "hidden")
+    : (document.body.style.overflowY = "auto");
 
   const dispatch = useDispatch();
 
+  // Проверка сессии и получение данных пользователя/корзины
   useEffect(() => {
     dispatch(validateSessionFunc())
-      .unwrap().then(() => {
+      .unwrap()
+      .then(() => {
         dispatch(getUserFunc());
         dispatch(getUserCart());
-      }).catch(() => dispatch(getGuestCart()))
-  }, [dispatch])
+      })
+      .catch(() => dispatch(getGuestCart()));
+  }, [dispatch]);
+
+  // Создаём ref для компонента SetHeader (чипсы)
+  const headerRef = useRef(null);
+
+  // Отслеживаем появление/исчезновение SetHeader для показа sticky navbar
+  useEffect(() => {
+    if (!headerRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Когда SetHeader не виден, показываем navbar
+        setShowNavbar(!entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+    observer.observe(headerRef.current);
+    return () => {
+      if (headerRef.current) observer.unobserve(headerRef.current);
+    };
+  }, []);
+
+  // Предполагаем, что список категорий можно получить из SetHeader.
+  // Для примера будем передавать SetHeader как дочерний элемент и получать его данные.
+  // Можно использовать глобальное состояние или другой подход.
+  const [menuHeader, setMenuHeader] = useState([]);
+  // Передадим в SetHeader callback для получения категорий (если необходимо)
+  const handleSetHeaderData = (data) => {
+    setMenuHeader(data);
+  };
 
   return (
     <div className="wrapper">
-      <Cart/>
-      <div className="common_wrapper" style={{maxWidth: isCartOpen ? "1228px" : ""}}>
-        <Header/>
+      {/* Корзина пользователя */}
+      <Cart />
+      <div
+        className="common_wrapper"
+        style={{ maxWidth: isCartOpen ? "1228px" : "" }}
+      >
+        {/* Хэдер */}
+        <Header />
         <div className="common">
+          {/* Баннеры */}
           <Banner />
+          {/* Виды доставки / Корпоративная доставка */}
           <About />
           <div className="category_wrapper">
-            {isLoading ? <h2><Skeleton width={250}/></h2> : <h2>Категории</h2>}
-            <div className="category_line_wrapper">
-              <div className="category_line">
+            {/* <div className="category_line">
                 {isLoading ? <CategoriesSkeleton/> : <Categories/>}
-              </div>
+              </div> */}
+            {isLoading ? <h2><Skeleton width={250} /></h2> : <h2>Категории</h2>}
+            <div className="category_line_wrapper">
             </div>
             <div className="catalog">
-              <div className="set_header_line">
-                <SetHeader 
-                  url={menuItem} 
-                />
+              <div className="set_header_line" ref={headerRef}>
+                {/* Компонент Чипсов с категориями */}
+                <SetHeader url={menuItem} onData={handleSetHeaderData} />
               </div>
               <div className="category_list" id="category_list">
-                  <CategoryList
-                    url={menuItem}
-                  />
+                {/* Компонент, в котором выводятся товары по категориям */}
+                <CategoryList url={menuItem} onActiveCategoryChange={setActiveCategory} />
               </div>
             </div>
           </div>
         </div>
-        <Adverts/>
-        <ContctToUs/>
-        <Footer/>
+        {/* Сотрудничество */}
+        <Adverts />
+        {/* Контакты */}
+        <ContctToUs />
+        {/* Футер */}
+        <Footer />
       </div>
-      <CartMobileButton/>
-      {isSingInOpen && <SignIn/>}
-      {isFoodInfoOpen && <FoodInfoModal/>}
+      <CartMobileButton />
+      {isSingInOpen && <SignIn />}
+      {isFoodInfoOpen && <FoodInfoModal />}
+      {/* Фиксированный navbar, отображается когда чипсы исчезают */}
+        <StickyNavbar categories={menuHeader} activeCategory={activeCategory} showNavbar={showNavbar} />
       <ToastContainer />
     </div>
   );

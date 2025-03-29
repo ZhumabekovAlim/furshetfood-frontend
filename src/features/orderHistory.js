@@ -8,7 +8,6 @@ export const getUserHistory = createAsyncThunk(
     async(_, {rejectWithValue}) => {
         try {
             const response = await axios.get(userOrderHistory);
-            console.log("Successfully user history: ", response);
             return response.data;
         } catch (error) {
             console.log("Error while fetching history: ", error);

@@ -29,11 +29,11 @@ function OrderHistoryCard({ userHistory }) {
                     <div className="food_item">
                       <div className="food-left">
                         <div className="food_img">
-                          <img src={item.item.image} alt={item.item.name} />
+                          <img src={`https://158.179.207.250/furshet/storage/${item.image_path}`} alt={item.name} />
                         </div>
                         <div className="food_mddl">
-                          <div className="food_ttl">{item.item.name}</div>
-                          <div className="food_desc">{item.item.description}</div>
+                          <div className="food_ttl">{item.name}</div>
+                          {/* <div className="food_desc">{item.description}</div> */}
                         </div>
                       </div>
                       <div className="food_price">{Math.round(item.price)} ₸</div>
@@ -41,6 +41,7 @@ function OrderHistoryCard({ userHistory }) {
                   )
                 })}
               </div>
+              <h4>Общая сумма: {item.total_price}</h4>
             </div>
           </div>
         );

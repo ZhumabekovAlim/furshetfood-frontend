@@ -10,7 +10,6 @@ export const getUserCart = createAsyncThunk(
   async(_, {rejectWithValue}) => {
     try {
       const response = await axios.get(cart);
-      console.log("User cart: ", response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message)
@@ -23,7 +22,6 @@ export const getGuestCart = createAsyncThunk(
   async(_, {rejectWithValue}) => {
     try {
       const response = await axios.get(cartGuest);
-      console.log('guest cart: ', response);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -35,17 +33,14 @@ export const postUserCart = createAsyncThunk(
   'postUserCart',
   async(userCart, {rejectWithValue}) => {
     try {
-      console.log("Ты заказл еду и это отправил!", userCart);
       const response = await axios.post(orders, userCart)
       toast.success("Поздравляю! Вы сделали заказ ожидайте звонка.", {
         position: "top-center", 
         autoClose: 5000,
         draggable: true
       });
-      console.log("User send cart: ", response);
       return response.data
     } catch(error) {
-      console.log("Error: ", error)
       toast.error("Ошибка! Сделайте заказ по-позже", {
         position: "top-center", 
         autoClose: 5000,
@@ -58,7 +53,7 @@ export const postUserCart = createAsyncThunk(
 
 const initialState = {
   items: [],
-  devices: 1,
+  devices: 0,
   deliveryMethod:"delivery",
   isCartOpen: false, 
   isCartLoading: false,
