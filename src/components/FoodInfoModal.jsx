@@ -8,7 +8,7 @@ import { getUserCart, getGuestCart } from "../features/cartSlice";
 
 import { foodItems } from "../constants/URLs";
 import { useDispatch, useSelector } from "react-redux";
-import { closeFood } from "../features/foodInfo";
+import { closeFood, openFood } from "../features/foodInfo";
 import LoadingModal from "./LoadingModal";
 
 function FoodInfoModal() {
@@ -57,6 +57,26 @@ function FoodInfoModal() {
         );
       } finally {
         setLoading(false);
+      }
+    }
+  };
+
+  const cartItemMinus = async (item_id) => {
+    const url = `${isAuthenticated ? cart : cartGuest}/${item_id}`;
+
+    if (isAuthenticated) {
+      try {
+        const response = await axios.delete(url);
+        dispatch(getUserCart());
+      } catch (error) {
+        console.log("Erro while removing item: ", error);
+      }
+    } else {
+      try {
+        const response = await axios.delete(url);
+        dispatch(getGuestCart());
+      } catch (error) {
+        console.log("Erro while removing item: ", error);
       }
     }
   };
@@ -126,10 +146,10 @@ function FoodInfoModal() {
               <div
                 className="button_add_to_basket"
                 style={{ justifyContent: "space-between" }}
-                onClick={() => handleAddToCart(dataInfo.id, dataInfo.item_type)}
               >
                 <button
                   style={{ backgroundColor: "transparent", cursor: "pointer" }}
+                  onClick={() => cartItemMinus(dataInfo.id)}
                 >
                   <svg
                     width="24"
@@ -164,6 +184,9 @@ function FoodInfoModal() {
                 </span>
                 <button
                   style={{ backgroundColor: "transparent", cursor: "pointer" }}
+                  onClick={() =>
+                    handleAddToCart(dataInfo.id, dataInfo.item_type)
+                  }
                 >
                   <svg
                     width="24"
@@ -206,7 +229,13 @@ function FoodInfoModal() {
                   (cartItem) => cartItem.item_id === item.id
                 );
                 return (
-                  <div className="product_item" key={item.id}>
+                  <div
+                    className="product_item"
+                    key={item.id}
+                    onClick={() => {
+                      dispatch(openFood({ foodId: item.id }));
+                    }}
+                  >
                     <img src={item.image_path} alt={item.name} />
                     <div className="product__item_desc_wrapper">
                       <div className="product_item_info">
@@ -221,7 +250,11 @@ function FoodInfoModal() {
                           // Если товар в корзине, показываем кнопку обновления
                           <>
                             <div className="product_item_in_cart">
-                              <button onClick={() => alert("Update cart")}>
+                              <button
+                                onClick={() => {
+                                  cartItemMinus(item.id);
+                                }}
+                              >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
                                   width="13"
@@ -242,7 +275,11 @@ function FoodInfoModal() {
                                   ).quantity
                                 }
                               </span>
-                              <button onClick={() => alert("Update cart")}>
+                              <button
+                                onClick={() => {
+                                  handleAddToCart(item.id);
+                                }}
+                              >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
                                   width="12"
@@ -259,7 +296,7 @@ function FoodInfoModal() {
                             </div>
                             {item.discount_price && (
                               <div className="product_item_price-discount">
-                                {Math.round(item.discount_price)} ₸
+                                {Math.round(item.regular_price)} ₸
                               </div>
                             )}
                           </>
@@ -272,7 +309,12 @@ function FoodInfoModal() {
                               }
                               key={item.id}
                             >
-                              <span>{Math.round(item.regular_price)} ₸</span>
+                              <span>
+                                {item.discount_price
+                                  ? Math.round(item.discount_price)
+                                  : Math.round(item.regular_price)}{" "}
+                                ₸
+                              </span>
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="12"
@@ -288,7 +330,7 @@ function FoodInfoModal() {
                             </button>
                             {item.discount_price && (
                               <div className="product_item_price-discount">
-                                {Math.round(item.discount_price)} ₸
+                                {Math.round(item.regular_price)} ₸
                               </div>
                             )}
                           </>

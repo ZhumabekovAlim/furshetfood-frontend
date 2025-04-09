@@ -1,202 +1,200 @@
 .food_info {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    z-index: 10;
-    overflow-y: hidden;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, .32);
-    transition: background .3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 10;
+  overflow-y: hidden;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.32);
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .food_info_wrapper {
-    background-color: #fff;
-    padding: 50px;
-    width: 100vw;
-    max-width: 800px;
-    position: relative;
-    border-radius: 30px;
+  background-color: #fff;
+  padding: 50px;
+  width: 100vw;
+  max-width: 800px;
+  position: relative;
+  border-radius: 30px;
 }
 
 .btn_close {
-    cursor: pointer;
-    position: absolute;
-    top: 3%;
-    right: 3%;
-    z-index: 1000;
+  cursor: pointer;
+  position: absolute;
+  top: 3%;
+  right: 3%;
+  z-index: 1000;
 }
 
 .food_info_top {
-    display: flex;
-    gap: 39px;
+  display: flex;
+  gap: 39px;
 }
 
 .food_info_img {
-    position: relative;
-    width: 100%;
-    max-width: 390px;
-    max-height: 192px;
-    border-radius: 20px;
+  position: relative;
+  width: 100%;
+  max-width: 390px;
+  max-height: 192px;
+  border-radius: 20px;
 }
 
 .food_info_img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.food_info__info {
+  flex: 1;
+}
+
+.food_info__info .product_item_price-discount {
+  font-size: 21px;
+}
+
+.food_info_ttl {
+  margin: 0;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.food_info_desc {
+  margin-top: 26px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.food_info_price {
+  display: flex;
+  justify-content: end;
+  font-size: 21px;
+  font-weight: 700;
+  /* text-decoration: underline; */
+}
+
+.button_add_to_basket {
+  align-items: center;
+  cursor: pointer;
+  background-color: #8b0506;
+  display: flex;
+  margin-top: 13px;
+  justify-content: center;
+  padding: 11px 0;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 19px;
+}
+
+.food_info_list {
+  display: flex;
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .food_info_wrapper {
+    padding: 20px;
+    width: 90vw;
+    height: auto;
+    max-width: 90vw;
+    max-height: none;
+    border-radius: 20px;
+  }
+
+  .btn_close {
+    top: 15px;
+    right: 15px;
+  }
+
+  .food_info_top {
+    display: flex;
+    gap: 39px;
+  }
+
+  .food_info_img {
+    position: relative;
+    flex: 1 1 auto;
+    max-width: 390px;
+    height: 192px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .food_info_img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: inherit;
-}
-  
+  }
 
-.food_info__info {
-    flex: 1;
-}
+  .food_info__info {
+    text-align: left;
+  }
 
-.food_info__info .product_item_price-discount {
-    font-size: 21px;
-}
+  .food_info_ttl {
+    font-size: 20px;
+  }
 
-.food_info_ttl {
-    margin: 0;
-    font-weight: 700;
-    font-size: 24px;
-}
+  .food_info_desc {
+    font-size: 14px;
+    margin-top: 16px;
+  }
 
-.food_info_desc {
-    margin-top: 26px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
-}
-
-.food_info_price {
-    display: flex;
-    justify-content: end;
-    font-size: 21px;
-    font-weight: 700;
-    /* text-decoration: underline; */
-}
-
-.button_add_to_basket {
-    align-items: center;
-    cursor: pointer;
-    background-color: #8B0506;
-    display: flex;
-    margin-top: 13px;
+  .food_info_price {
+    font-size: 18px;
+    margin-top: 20px;
     justify-content: center;
-    padding: 11px 0;
-    border-radius: 10px;
-    color: #fff;
-    font-weight: 700;
-    font-size: 19px;
-}
+  }
 
-.food_info_list {
-    display: flex;
-    gap: 15px;
-}
-
-@media (max-width: 768px) {
-    .food_info_wrapper {
-        padding: 20px;
-        width: 90vw;
-        height: auto;
-        max-width: 90vw;
-        max-height: none;
-        border-radius: 20px;
-    }
-
-    .btn_close {
-        top: 15px;
-        right: 15px;
-    }
-
-    .food_info_top {
-        display: flex;
-        gap: 39px;
-    }
-    
-    .food_info_img {
-        position: relative;
-        flex: 1 1 auto; 
-        max-width: 390px;
-        height: 192px;  
-        border-radius: 20px;
-        overflow: hidden; 
-    }
-    
-    .food_info_img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; 
-        border-radius: inherit;
-    }
-    
-
-    .food_info__info {
-        text-align: left;
-    }
-
-    .food_info_ttl {
-        font-size: 20px;
-    }
-
-    .food_info_desc {
-        font-size: 14px;
-        margin-top: 16px;
-    }
-
-    .food_info_price {
-        font-size: 18px;
-        margin-top: 20px;
-        justify-content: center;
-    }
-
-    .button_add_to_basket {
-        font-size: 12px;
-        padding: 10px 0;
-    }
+  .button_add_to_basket {
+    font-size: 12px;
+    padding: 10px 0;
+  }
 }
 
 @media (max-width: 430px) {
-    .food_info_top {
-        flex-direction: column;
-        gap: 20px;
-    }
+  .food_info_top {
+    flex-direction: column;
+    gap: 20px;
+  }
 
-    .food_info_img {
-        /* min-height: 300px; */
-    }
+  .food_info_img {
+    /* min-height: 300px; */
+  }
 
-    .food_info_top .food_info_price {
-        margin-top: 0;
-    }
-    .food_info_top .product_item_price-discount {
-        font-size: 18px;
-    }
+  .food_info_top .food_info_price {
+    margin-top: 0;
+  }
+  .food_info_top .product_item_price-discount {
+    font-size: 18px;
+  }
 
-    .food_info_list {
-        overflow-x: scroll;
-    }
+  .food_info_list {
+    overflow-x: scroll;
+  }
 
-    .food_info_list .product_item {
-        min-width: 75%;
-        margin: 10px;
-    }
+  .food_info_list .product_item {
+    min-width: 75%;
+    margin: 10px;
+  }
 
-    .food_info_list .product_item:hover {
-        transform: none;
-    }
+  .food_info_list .product_item:hover {
+    transform: none;
+  }
 
-    .button_add_to_basket span {
-        font-size: 16px;
-    }
+  .button_add_to_basket span {
+    font-size: 16px;
+  }
 
-    .btn_close {
-        top: 3%;
-        right: 6%;
-    }
+  .btn_close {
+    top: 3%;
+    right: 6%;
+  }
 }

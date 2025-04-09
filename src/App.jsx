@@ -5,20 +5,20 @@ import About from "./components/About";
 import Categories from "./components/Categories";
 import SetHeader from "./components/SetHeader";
 import CategoryList from "./components/CategoryList";
-import Footer from './components/Footer';
-import Cart from './components/Cart';
-import SignIn from './components/SignInModal';
+import Footer from "./components/Footer";
+import Cart from "./components/Cart";
+import SignIn from "./components/SignInModal";
 import ContctToUs from "./components/ContctToUs";
 import Adverts from "./components/Adverts";
 import { menuItem } from "./constants/URLs";
 import "./App.css";
 
 import { ToastContainer } from "react-toastify";
-import 'react-loading-skeleton/dist/skeleton.css'
+import "react-loading-skeleton/dist/skeleton.css";
 
 import { useSelector, useDispatch } from "react-redux";
 import { validateSessionFunc, getUserFunc } from "./features/authSlice";
-import { getUserCart, getGuestCart } from './features/cartSlice';
+import { getUserCart, getGuestCart } from "./features/cartSlice";
 import FoodInfoModal from "./components/FoodInfoModal";
 import CartMobileButton from "./components/CartMobileButton";
 import Skeleton from "react-loading-skeleton";
@@ -58,22 +58,21 @@ function App() {
   useEffect(() => {
     const handleScroll = () => {
       if (!headerRef.current) return;
-  
+
       const { top } = headerRef.current.getBoundingClientRect();
-  
+
       // Если пользователь проскроллил вниз и прошел мимо блока категорий (top < 0)
       // Показываем navbar
       setShowNavbar(top < 0);
     };
-  
+
     handleScroll(); // Проверим сразу при монтировании
-  
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  
 
   // Предполагаем, что список категорий можно получить из SetHeader.
   // Для примера будем передавать SetHeader как дочерний элемент и получать его данные.
@@ -103,9 +102,13 @@ function App() {
             {/* <div className="category_line">
                 {isLoading ? <CategoriesSkeleton/> : <Categories/>}
               </div> */}
-            {isLoading ? <h2><Skeleton width={250} /></h2> : <h2>Категории</h2>}
-            <div className="category_line_wrapper">
-            </div>
+            {isLoading ? (
+              <h2>
+                <Skeleton width={250} />
+              </h2>
+            ) : (
+              <h2>Категории</h2>
+            )}
             <div className="catalog">
               <div className="set_header_line" ref={headerRef}>
                 {/* Компонент Чипсов с категориями */}
@@ -113,7 +116,10 @@ function App() {
               </div>
               <div className="category_list" id="category_list">
                 {/* Компонент, в котором выводятся товары по категориям */}
-                <CategoryList url={menuItem} onActiveCategoryChange={setActiveCategory} />
+                <CategoryList
+                  url={menuItem}
+                  onActiveCategoryChange={setActiveCategory}
+                />
               </div>
             </div>
           </div>
@@ -129,7 +135,11 @@ function App() {
       {isSingInOpen && <SignIn />}
       {isFoodInfoOpen && <FoodInfoModal />}
       {/* Фиксированный navbar, отображается когда чипсы исчезают */}
-        <StickyNavbar categories={menuHeader} activeCategory={activeCategory} showNavbar={showNavbar} />
+      <StickyNavbar
+        categories={menuHeader}
+        activeCategory={activeCategory}
+        showNavbar={showNavbar}
+      />
       <ToastContainer />
     </div>
   );
