@@ -1,35 +1,55 @@
 .code-container {
-    position: relative;
-    display: flex;
-    margin: 40px 0px;
-    height: 100%;
-    min-height: 45px;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
+  position: relative;
+  display: flex;
+  margin: 40px 0px;
+  height: 100%;
+  min-height: 45px;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
 }
 
 .code-box-unselected {
-    width: 24px;
-    height: 24px;
-    font-weight: bold;
-    background-color: #D9D9D9;
-    border-radius: 100%;
-    cursor: text;
+  width: 36px;
+  height: 36px;
+  font-weight: bold;
+  background-color: #d9d9d9;
+  border-radius: 100%;
+  text-align: center;
+  font-size: 16px;
+
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  cursor: text;
 }
 
-.code-box-unselected:focus, .code-box-selected:focus {
-    outline: none;
+.code-box-unselected:focus,
+.code-box-selected:focus {
+  outline: none;
 }
 
 .code-box-selected {
-    text-align: center;
-    font-weight: bold;
-    font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 30px;
 }
 
 .send_again {
-    cursor: pointer;
-    font-size: 0.67em;
-    font-weight: bold;
+  cursor: pointer;
+  font-size: 0.67em;
+  font-weight: bold;
+}
+
+@media (max-width: 500px) {
+  .code-box-unselected {
+    width: 24px;
+    height: 24px;
+  }
 }
