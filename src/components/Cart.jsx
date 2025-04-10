@@ -70,6 +70,7 @@ const Cart = () => {
       })
       .catch((e) => console.error("Cart/FetchCategories:", e))
       .finally(() => setCartLoading(false));
+    console.log("fetching categories");
   }, []);
 
   useEffect(() => {
@@ -251,10 +252,10 @@ const Cart = () => {
   };
 
   const handleDecrement = () => {
-    if(tools) {
+    if (tools) {
       cartItemMinus(tools.item_id);
     }
-  }
+  };
 
   return (
     <>

@@ -29,6 +29,7 @@ const CategoryList = ({ url, onActiveCategoryChange }) => {
     axios
       .get(url)
       .then((response) => {
+        console.log("response est");
         setMenuCategoryItem(response.data);
         setFetchingData(false);
         const allItems = response.data.reduce((acc, category) => {
@@ -46,7 +47,7 @@ const CategoryList = ({ url, onActiveCategoryChange }) => {
         }
       })
       .catch((error) => console.log("ERROR caught category list: ", error));
-  }, [url, dispatch]);
+  }, []);
 
   // Обновляем активную категорию на основе положения блоков
   useEffect(() => {

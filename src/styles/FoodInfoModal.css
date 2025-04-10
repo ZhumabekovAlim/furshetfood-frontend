@@ -182,6 +182,10 @@
     /* min-height: 300px; */
   }
 
+  .food_info__info .food_info_desc {
+    margin-top: 0;
+  }
+
   .food_info_top .food_info_price {
     margin-top: 0;
   }

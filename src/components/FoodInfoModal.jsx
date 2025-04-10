@@ -130,7 +130,7 @@ function FoodInfoModal() {
             <div
               style={{
                 display: "flex",
-                marginTop: "25px",
+                marginTop: "10px",
                 gap: "10px",
                 justifyContent: "flex-end",
               }}
@@ -221,7 +221,7 @@ function FoodInfoModal() {
         </section>
 
         <section className="food_info_botttom">
-          <h2>Что-то ещё?</h2>
+          <h2 style={{ marginBottom: 0 }}>Что-то ещё?</h2>
           <div className="food_info_list">
             {moreItems.map((item) => {
               if (item.name !== "Приборы") {
