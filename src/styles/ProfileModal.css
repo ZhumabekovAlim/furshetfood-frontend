@@ -1,199 +1,208 @@
 .profile_modal {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    right: 0;
-    background: rgba(0, 0, 0, .32);
-    transition: background .3s;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.32);
+  transition: background 0.3s;
 }
 
 .profile_modal_wrapper {
-    position: absolute;
-    top: 85px;
-    right: 322px;
+  position: absolute;
+  top: 85px;
+  right: 322px;
 }
 
 .profile_modal_inner {
-    background-color: #fff;
-    padding: 36px 30px 40px 30px;
-    width: 100vw;
-    height: 100vh;
-    max-width: 400px;
-    max-height: 266px;
-    border-radius: 20px;
+  background-color: #fff;
+  padding: 36px 30px 40px 30px;
+  width: 100vw;
+  height: 100vh;
+  max-width: 400px;
+  max-height: 266px;
+  border-radius: 20px;
 }
 
 .profile_modal_userProfile {
-    display: flex;
-    flex-direction: column;
-    max-height: 535px;
-    background-color: #fff;
-    padding: 36px 30px 40px 30px;
-    width: 100%;
-    max-width: 320px;
-    max-height: 535px;
-    border-radius: 20px;
-    overflow: auto;
+  display: flex;
+  flex-direction: column;
+  max-height: 535px;
+  background-color: #fff;
+  padding: 36px 30px 40px 30px;
+  width: 100%;
+  max-width: 320px;
+  max-height: 535px;
+  border-radius: 20px;
+  overflow: auto;
 }
 
 .profile_modal_userProfile::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .ttl_profile_modal {
-    font-size: 26px;
-    font-weight: 700;
-    line-height: 31px;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 31px;
 }
 
 .profile_modal_header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .close_profile_modal {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .profile_modal_line {
-    margin-top: 15px;
-    height: 1px;
-    display: flex;
-    background-color: #8B0506;
+  margin-top: 15px;
+  height: 1px;
+  display: flex;
+  background-color: #8b0506;
 }
 
 .sections_profile_modal {
-    display: flex;
-    margin-top: 15px;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  margin-top: 15px;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .sections_profile_modal span {
-    font-size: 24px;
-    font-weight: 600;
-    color: #272727;
+  font-size: 24px;
+  font-weight: 600;
+  color: #272727;
 }
 
 .profile_serction {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .profile_modal_userProfile_header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .profile_modal_userProfile_header img {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .profile_modal_userProfile_header span {
-    font-size: 26px;
-    font-weight: bold;
+  font-size: 26px;
+  font-weight: bold;
 }
 
 .profile_modal_userProfile_body {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .profile_modal_userProfile_body::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .input_form_field {
-    background-color: #F2F2F2;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    padding: 5px 15px 12px 15px;
-    margin-bottom: 12px;
+  background-color: #f2f2f2;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 15px 12px 15px;
+  margin-bottom: 12px;
 }
 
 .profile_input {
-    background-color: transparent !important;
-    border: none;
-    font-size: 21px;
-    font-weight: 500;
+  background-color: transparent !important;
+  border: none;
+  font-size: 21px;
+  font-weight: 500;
 }
 
 .profile_input:focus {
-    outline: none;
+  outline: none;
 }
 
 .input_hintText {
-    font-size: 16px;
-    color: #6D6D6D;
+  font-size: 16px;
+  color: #6d6d6d;
 }
 
 .profile_save_form_submit {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 8px 0;
-    background-color: #8B0506;
-    font-size: 19px;
-    font-weight: bold;
-    color: #fff;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 8px 0;
+  background-color: #8b0506;
+  font-size: 19px;
+  font-weight: bold;
+  color: #fff;
 }
 
 .profile_delete_form_submit {
-    margin-top: 15px;
-    font-size: 19px;
-    padding: 8px 0;
-    color: #272727;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    background-color: transparent;
-    border: 1px solid #6D6D6D;
+  margin-top: 15px;
+  font-size: 19px;
+  padding: 8px 0;
+  color: #272727;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid #6d6d6d;
 }
 
 .empty_cardHistory {
-    display: flex;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: 600;
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .error_message_profile {
-    color: red;
-    font-size: 15px;
+  color: red;
+  font-size: 15px;
 }
 
 @media (max-width: 1440px) and (min-width: 1024px) {
-    .profile_modal_wrapper {
-        top: 75px;
-        right: 188px;   
-    }
+  .profile_modal_wrapper {
+    top: 75px;
+    right: 188px;
+  }
 }
 
 @media (max-width: 1024px) and (min-width: 768px) {
-    .profile_modal_wrapper {
-        top: 75px;
-        right: 158px;   
-    }
+  .profile_modal_wrapper {
+    top: 75px;
+    right: 158px;
+  }
 }
 
 @media (max-width: 768px) {
-    .profile_modal {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+  .profile_modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    .profile_modal_wrapper {
-        position:static;
-    }
+  .profile_modal_wrapper {
+    position: static;
+  }
 
-    .profile_back_btn {
-        display: none;
-    }
+  .profile_back_btn {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  /* .profile_modal_wrapper {
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translate(0, -50%);
+  } */
 }

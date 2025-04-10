@@ -1,5 +1,5 @@
-import React from 'react';
-import '../styles/CardHistory.css';
+import React from "react";
+import "../styles/CardHistory.css";
 
 function OrderHistoryCard({ userHistory }) {
   if (!userHistory || userHistory.length === 0) {
@@ -10,10 +10,10 @@ function OrderHistoryCard({ userHistory }) {
     <>
       {userHistory.map((item) => {
         const dateObj = new Date(item.created_at);
-        const dateString = dateObj.toLocaleDateString('ru-RU'); 
-        const timeString = dateObj.toLocaleTimeString('ru-RU', {
-          hour: '2-digit',
-          minute: '2-digit',
+        const dateString = dateObj.toLocaleDateString("ru-RU");
+        const timeString = dateObj.toLocaleTimeString("ru-RU", {
+          hour: "2-digit",
+          minute: "2-digit",
           hour12: false,
         });
         return (
@@ -29,16 +29,20 @@ function OrderHistoryCard({ userHistory }) {
                     <div className="food_item">
                       <div className="food-left">
                         <div className="food_img">
-                          <img src={`https://158.179.207.250/furshet/storage/${item.image_path}`} alt={item.name} />
+                          <img
+                            src={`https://158.179.207.250/furshet/storage/${item.image_path}`}
+                            alt={item.name}
+                          />
                         </div>
                         <div className="food_mddl">
                           <div className="food_ttl">{item.name}</div>
-                          {/* <div className="food_desc">{item.description}</div> */}
                         </div>
                       </div>
-                      <div className="food_price">{Math.round(item.price)} ₸</div>
+                      <div className="food_price">
+                        {Math.round(item.price)} ₸
+                      </div>
                     </div>
-                  )
+                  );
                 })}
               </div>
               <h4>Общая сумма: {item.total_price}</h4>

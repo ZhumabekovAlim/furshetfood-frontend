@@ -52,6 +52,15 @@ const Cart = () => {
   const [loading, setLoading] = useState(false);
   const [cartLoading, setCartLoading] = useState(false);
 
+  function formatPrice(amount) {
+    return (
+      amount
+        .toFixed(2) // округление до 2 знаков
+        .replace(/\B(?=(\d{3})+(?!\d))/g, " ") + // добавление пробелов между тысячами
+      " ₸"
+    );
+  }
+
   const setPaymentTypeFunc = (value) => {
     setIsPaymentOpen(false);
     setPaymentType(value);
@@ -599,9 +608,10 @@ const Cart = () => {
                 <div className="total_amount">
                   <h2>
                     {isAuthenticated
-                      ? Math.max(totalAmount - userInfo.userBonus_points, 0)
-                      : totalAmount}{" "}
-                    тг
+                      ? formatPrice(
+                          Math.max(totalAmount - userInfo.userBonus_points, 0)
+                        )
+                      : formatPrice(totalAmount)}
                   </h2>
                 </div>
               </div>

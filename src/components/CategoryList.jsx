@@ -192,7 +192,7 @@ const CategoryList = ({ url, onActiveCategoryChange }) => {
     }
   };
 
-  //   menuCategoryItem && console.log(JSON.stringify(menuCategoryItem, null, 2));
+  menuCategoryItem && console.log(JSON.stringify(menuCategoryItem, null, 2));
 
   return (
     <>
