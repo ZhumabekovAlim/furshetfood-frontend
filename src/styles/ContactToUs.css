@@ -1,66 +1,66 @@
 .contact_wrapper {
-    display: flex;
-    justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .multi_button_social_media {
-    position: fixed;
-    right: 5%;
-    bottom: 50px;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
+  position: fixed;
+  right: 5%;
+  bottom: 50px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
 }
 
 .multi_button_social_media img {
-    width: 2.5rem;
+  width: 2.5rem;
 }
 
 .contact_inner {
-    display: flex;
-    gap: 6px;
-    flex-direction: row;
+  display: flex;
+  gap: 6px;
+  flex-direction: row;
 }
 
 .social_media {
-    position: absolute;
-    z-index: 1;
+  position: absolute;
+  z-index: 1;
 }
 
 .close_social_media {
-    position: relative;
-    z-index: 2;
+  position: relative;
+  z-index: 2;
 }
 
 .social_btn,
 .chat_button,
 .close_social_media {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .social_btn {
-    transition: transform 0.5s ease, opacity 0.2s ease;
-    opacity: 0;
+  transition: transform 0.5s ease, opacity 0.2s ease;
+  opacity: 0;
 }
 
 .social_btn.open {
-    opacity: 1;
-    transform: translateY(-45px);
+  opacity: 1;
+  transform: translateY(-45px);
 }
 
 .social_btn.closed {
-    opacity: 0;
-    transform: translateY(0px);
+  opacity: 0;
+  transform: translateY(0px);
 }
 
-@media (max-width:440px) {
-    .contact_wrapper {
-        display: none;
-    }
+@media (max-width: 500px) {
+  .contact_wrapper {
+    display: none;
+  }
 }
 
-@media(max-width: 430px) {
-    .multi_button_social_media {
-        bottom: 80px;
-    }
+@media (max-width: 430px) {
+  .multi_button_social_media {
+    bottom: 80px;
+  }
 }

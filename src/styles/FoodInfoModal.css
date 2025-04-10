@@ -153,13 +153,26 @@
     justify-content: center;
   }
 
+  .food_info__info .food_info_price {
+    margin-top: 0;
+    font-size: 16px;
+  }
+
+  .food_info__info .product_item_price-discount {
+    font-size: 16px;
+  }
+
+  .food_info_list .product_item .product_item_desc {
+    display: none;
+  }
+
   .button_add_to_basket {
     font-size: 12px;
     padding: 10px 0;
   }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 500px) {
   .food_info_top {
     flex-direction: column;
     gap: 20px;
@@ -173,7 +186,7 @@
     margin-top: 0;
   }
   .food_info_top .product_item_price-discount {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .food_info_list {

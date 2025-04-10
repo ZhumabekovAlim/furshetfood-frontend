@@ -1,27 +1,27 @@
 .menu_title {
-    font-size: 16px;
-    font-weight: 500;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .menuHeader {
-    background-color: #F6F6F6;
-    padding: 5px 12px;
-    cursor: pointer;
-    border-radius: 10px;
-    user-select: none;
+  background-color: #f6f6f6;
+  padding: 5px 12px;
+  cursor: pointer;
+  border-radius: 10px;
+  user-select: none;
 }
 
 .skeleton_menu_header {
-    cursor: pointer;
-    border-radius:10px;
+  cursor: pointer;
+  border-radius: 10px;
 }
 .skeleton_menu_header:hover,
 .menuHeader:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
-@media (max-width:440px) {
-    .menu_title {
-        white-space: nowrap;        
-    }
+@media (max-width: 500px) {
+  .menu_title {
+    white-space: nowrap;
+  }
 }

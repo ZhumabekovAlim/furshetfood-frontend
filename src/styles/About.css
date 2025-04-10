@@ -1,129 +1,129 @@
 .buttons_container {
-    display: inline-flex;
-    width: 100%;
-    gap: 19px;
+  display: inline-flex;
+  width: 100%;
+  gap: 19px;
 }
 
 .delivery_method,
 .corporate_order {
-    width: 100%;
-    background-color: #fff4e0;
-    border-radius: 12px;
-    padding: 17px 29px 9px 23px;
-    text-align: center;
+  width: 100%;
+  background-color: #fff4e0;
+  border-radius: 12px;
+  padding: 17px 29px 9px 23px;
+  text-align: center;
 }
 
 .corporate_order {
-    border: none;
-    max-width: 400px;
+  border: none;
+  max-width: 400px;
 }
 
 h3 {
-    margin-bottom: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #272727;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #272727;
 }
 
 .buttons_group {
-    background-color: #FAFAFA;
-    position: relative;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-around;
+  background-color: #fafafa;
+  position: relative;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .button {
-    width: 100%;
-    padding: 8px 70px;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    user-select: none;
-    position: relative;
-    z-index: 3;
-    background-color: transparent;
-    color: #272727;
-    transition: all 0.3s ease;
+  width: 100%;
+  padding: 8px 70px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  z-index: 3;
+  background-color: transparent;
+  color: #272727;
+  transition: all 0.3s ease;
 }
 
 .button.active {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .contact_button {
-    padding: 8px 111px;
-    color: #ffffff;
-    background-color: #8b0000;
-    width: 100%;
+  padding: 8px 111px;
+  color: #ffffff;
+  background-color: #8b0000;
+  width: 100%;
 }
 
 .order_title {
-    font-weight: 600;
-    font-size: 18px;
-    color: #272727;
-    margin-bottom: 16px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #272727;
+  margin-bottom: 16px;
 }
 
 .switch_marker {
-    background-color: #8b0000;
-    position: absolute;
-    z-index: 2;
-    width: 50%;
-    height: 100%;
-    border-radius: 10px;
-    transition: left .3s;
+  background-color: #8b0000;
+  position: absolute;
+  z-index: 2;
+  width: 50%;
+  height: 100%;
+  border-radius: 10px;
+  transition: left 0.3s;
 }
 
 .skeleton_wrapper {
-    display: grid;
-    grid-template-columns: 70% 30%;
-    grid-gap: 19px;
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-gap: 19px;
 }
 
 @media (max-width: 768px) {
-    .buttons_container {
-        flex-direction: row; 
-        gap: 10px;
-        width: 100%;
-        padding: 0 10px;
-    }
+  .buttons_container {
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    padding: 0 10px;
+  }
 
-    .delivery_method,
-    .corporate_order {
-        flex: 1 1 0;
-        min-width: 0;
-        padding: 10px;
-    }
-    
-    .order_title {
-        font-size: 15px;
-        margin-bottom: 10px;
-    }
-    
-    .button {
-        padding: 6px 10px;
-        font-size: 12px;
-    }
-    
-    .contact_button {
-        padding: 6px 10px;
-    }
-    
-    .corporate_order {
-        max-width: none;
-    }
+  .delivery_method,
+  .corporate_order {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 10px;
+  }
+
+  .order_title {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .contact_button {
+    padding: 6px 10px;
+  }
+
+  .corporate_order {
+    max-width: none;
+  }
 }
 
-@media (max-width: 420px) {
-    .buttons_container {
-        flex-direction: column; 
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        width: 100%;
-        padding: 0;
-    }
+@media (max-width: 500px) {
+  .buttons_container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 0;
+  }
 }

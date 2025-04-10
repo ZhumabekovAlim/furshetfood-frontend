@@ -1,165 +1,169 @@
 .adverts_wrapper {
-    margin-top: 57px;
-    margin-bottom: 13px;
-    border-radius: 24px;
-    background: linear-gradient(45deg, rgba(139, 5, 6, 1) 0%, rgba(255, 185, 56, 0.4) 40%);
+  margin-top: 57px;
+  margin-bottom: 13px;
+  border-radius: 24px;
+  background: linear-gradient(
+    45deg,
+    rgba(139, 5, 6, 1) 0%,
+    rgba(255, 185, 56, 0.4) 40%
+  );
 }
 
 /* Исходное расположение для десктопа */
 .adverts_innerr {
-    display: flex;
-    justify-content: space-around;
-    /* justify-content: center; */
-    /* gap: 110px; */
-    padding: 48px 58px 0px 89px;
+  display: flex;
+  justify-content: space-around;
+  /* justify-content: center; */
+  /* gap: 110px; */
+  padding: 48px 58px 0px 89px;
 }
 
 .social_media_adverts {
-    display: flex;
-    gap: 14px;
+  display: flex;
+  gap: 14px;
 }
 
 .whatsapp_btn {
-    padding: 10px 23px 10px 12px;
-    background-color: #60D669;
-    border-radius: 10px;
-    color: white;
-    display: flex;
-    align-items: center;
+  padding: 10px 23px 10px 12px;
+  background-color: #60d669;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
 }
 
 .desc {
-    display: inline-block;
-    margin-top: 33px;
-    margin-bottom: 19px;
+  display: inline-block;
+  margin-top: 33px;
+  margin-bottom: 19px;
 }
 
 .desc span {
-    color: #272727;
-    font-weight: 800;
+  color: #272727;
+  font-weight: 800;
 }
 
 .adverts_left {
-    display: flex;
+  display: flex;
 }
 
-@media(max-width: 1250px) {
-    .adverts_innerr {
-        justify-content: space-between;
-    }
+@media (max-width: 1250px) {
+  .adverts_innerr {
+    justify-content: space-between;
+  }
 }
-@media(max-width: 1120px) {
-    .adverts_innerr h1 {
-        font-size: 2.5em;
-    }
-    .adverts_innerr h2 {
-        font-size: 1.3em;
-    }
+@media (max-width: 1120px) {
+  .adverts_innerr h1 {
+    font-size: 2.5em;
+  }
+  .adverts_innerr h2 {
+    font-size: 1.3em;
+  }
 }
-@media(max-width: 1120px) {
-    .adverts_innerr h1 {
-        font-size: 2em;
-    }
-    .adverts_innerr h2 {
-        font-size: 1em;
-    }
-    .adverts_innerr .desc {
-        font-size: .8em;
-    }
+@media (max-width: 1120px) {
+  .adverts_innerr h1 {
+    font-size: 2em;
+  }
+  .adverts_innerr h2 {
+    font-size: 1em;
+  }
+  .adverts_innerr .desc {
+    font-size: 0.8em;
+  }
 }
-@media(max-width: 860px) {
-    .adverts_innerr {
-        padding: 30px 40px 0px 70px;
-    }
-    .adverts_innerr h1 {
-        font-size: 1.9em;
-    }
-    .adverts_innerr h2 {
-        font-size: .9em;
-    }
-    .adverts_innerr .desc {
-        font-size: .7em;
-        margin-bottom: 0;
-    }
+@media (max-width: 860px) {
+  .adverts_innerr {
+    padding: 30px 40px 0px 70px;
+  }
+  .adverts_innerr h1 {
+    font-size: 1.9em;
+  }
+  .adverts_innerr h2 {
+    font-size: 0.9em;
+  }
+  .adverts_innerr .desc {
+    font-size: 0.7em;
+    margin-bottom: 0;
+  }
 }
 
 @media (max-width: 768px) {
-    .adverts_innerr {
-        gap: 20px;
-        padding: 20px 20px 0px 20px;
-    }
+  .adverts_innerr {
+    gap: 20px;
+    padding: 20px 20px 0px 20px;
+  }
 
-    .adverts_left,
-    .adverts_right {
-        width: 100%;
-        text-align: center;
-    }
+  .adverts_left,
+  .adverts_right {
+    width: 100%;
+    text-align: center;
+  }
 
-    .adverts_left img {
-        max-width: 100%;
-        height: auto;
-    }
+  .adverts_left img {
+    max-width: 100%;
+    height: auto;
+  }
 
-    .social_media_adverts {
-        justify-content: center;
-        gap: 10px;
-    }
+  .social_media_adverts {
+    justify-content: center;
+    gap: 10px;
+  }
 
-    h1 {
-        font-size: 24px;
-    }
+  h1 {
+    font-size: 24px;
+  }
 
-    h2 {
-        font-size: 18px;
-    }
+  h2 {
+    font-size: 18px;
+  }
 
-    .whatsapp_btn {
-        padding: 10px 20px;
-        font-size: 16px;
-        margin: 0 auto;
-    }
+  .whatsapp_btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 0 auto;
+  }
 
-    .desc {
-        font-size: 13px;
-        text-align: start;
-    }
+  .desc {
+    font-size: 13px;
+    text-align: start;
+  }
 }
 
-@media (max-width: 430px) {
-    .adverts_innerr h1 {
-        font-size: 2em;
-        /* text-align: left; */
-    }
-    .adverts_innerr h2 {
-        font-size: 1em;
-        /* text-align: left; */
-    }
-    .adverts_innerr .desc {
-        font-size: .8em;
-        text-align: center;
-    }
-    .adverts_innerr .desc br {
-        display: none;
-    }
-    .adverts_innerr .whatsapp_btn {
-        /* margin: 0; */
-        width: 100%;
-    }
-    .adverts_innerr {
-        flex-direction: column;
-    }
-    .adverts_right {
-        order: 1;
-    }
-    .adverts_left {
-        justify-content: center;
-        order: 2;
-    }
-    .adverts_left img {
-        width: 100%;
-    }
+@media (max-width: 500px) {
+  .adverts_innerr h1 {
+    font-size: 2em;
+    /* text-align: left; */
+  }
+  .adverts_innerr h2 {
+    font-size: 1em;
+    /* text-align: left; */
+  }
+  .adverts_innerr .desc {
+    font-size: 0.8em;
+    text-align: center;
+  }
+  .adverts_innerr .desc br {
+    display: none;
+  }
+  .adverts_innerr .whatsapp_btn {
+    /* margin: 0; */
+    width: 100%;
+  }
+  .adverts_innerr {
+    flex-direction: column;
+  }
+  .adverts_right {
+    order: 1;
+  }
+  .adverts_left {
+    justify-content: center;
+    order: 2;
+  }
+  .adverts_left img {
+    width: 100%;
+  }
 
-    .social_media_adverts {
-        /* justify-content: start; */
-    }
+  .social_media_adverts {
+    /* justify-content: start; */
+  }
 }

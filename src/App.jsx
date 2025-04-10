@@ -50,7 +50,7 @@ function App() {
         dispatch(getUserCart());
       })
       .catch(() => dispatch(getGuestCart()));
-  }, [dispatch]);
+  }, []);
 
   // Создаём ref для компонента SetHeader (чипсы)
   const headerRef = useRef(null);
