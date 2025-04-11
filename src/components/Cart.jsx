@@ -187,31 +187,48 @@ const Cart = () => {
     }
 
     if (isAuthenticated) {
-      if(deliveryMethod === "delivery") {
-        if(address) {
+      if (deliveryMethod === "delivery") {
+        if (address) {
+          console.log("zakaz:", {
+            comments: orderComment,
+            payment_type: paymentType,
+            devices,
+            promo: promocode,
+            delivery_method:
+              deliveryMethod === "delivery" ? "Доставка" : "Самовывоз",
+            address,
+            use_bonus_points: userInfo.userBonus_points,
+          });
           dispatch(
-              postUserCart({
-                orderComment,
-                paymentType,
-                deliveryMethod,
-                devices,
-                promocode,
-                address
-              })
+            postUserCart({
+              comments: orderComment,
+              payment_type: paymentType,
+              devices,
+              promo: promocode,
+              delivery_method:
+                deliveryMethod === "delivery" ? "Доставка" : "Самовывоз",
+              address,
+              use_bonus_points: userInfo.userBonus_points ? true : false,
+            })
           );
         } else {
           setAddressError("Введите адрес доставки");
         }
-      } else if(deliveryMethod === "selfPickUp") {
+      } else if (deliveryMethod === "selfPickUp") {
         dispatch(
-            postUserCart({
-              orderComment,
-              paymentType,
-              deliveryMethod,
-              devices,
-              promocode,
-              address: "Кенен Азербаев 2"
-            })
+          postUserCart({
+            comments: orderComment,
+            payment_type: paymentType,
+            devices,
+            promo: promocode,
+            delivery_method:
+              deliveryMethod === "delivery" ? "Доставка" : "Самовывоз",
+            address: "Кенен Азербаев 2",
+            use_bonus_points:
+              userInfo.userBonus_points > totalAmount
+                ? totalAmount
+                : userInfo.userBonus_points,
+          })
         );
       }
     } else {
@@ -628,7 +645,10 @@ const Cart = () => {
                         <div className="option_ttl">Бонусы</div>
                       </div>
                       <div className="option_ttl_honus">
-                        {userInfo.userBonus_points} ₸
+                        {userInfo.userBonus_points > totalAmount
+                          ? totalAmount
+                          : userInfo.userBonus_points}{" "}
+                        ₸
                       </div>
                     </div>
                   </div>
@@ -661,9 +681,9 @@ const Cart = () => {
                     setAddress(e.target.value);
                   }}
                 />
-                {addressError && (<p className={"error_message"}>
-                    {addressError}
-                </p>)}
+                {addressError && (
+                  <p className={"error_message"}>{addressError}</p>
+                )}
               </div>
 
               <div style={{ marginTop: "10px" }}>
