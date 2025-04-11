@@ -189,16 +189,6 @@ const Cart = () => {
     if (isAuthenticated) {
       if (deliveryMethod === "delivery") {
         if (address) {
-          console.log("zakaz:", {
-            comments: orderComment,
-            payment_type: paymentType,
-            devices,
-            promo: promocode,
-            delivery_method:
-              deliveryMethod === "delivery" ? "Доставка" : "Самовывоз",
-            address,
-            use_bonus_points: userInfo.userBonus_points,
-          });
           dispatch(
             postUserCart({
               comments: orderComment,
@@ -224,10 +214,7 @@ const Cart = () => {
             delivery_method:
               deliveryMethod === "delivery" ? "Доставка" : "Самовывоз",
             address: "Кенен Азербаев 2",
-            use_bonus_points:
-              userInfo.userBonus_points > totalAmount
-                ? totalAmount
-                : userInfo.userBonus_points,
+            use_bonus_points: userInfo.userBonus_points ? true : false,
           })
         );
       }
