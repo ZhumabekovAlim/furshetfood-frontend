@@ -54,6 +54,7 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState(null);
   const [loading, setLoading] = useState(false);
   const [cartLoading, setCartLoading] = useState(false);
+  const [addressError, setAddressError] = useState("");
 
   function formatPrice(amount) {
     return (
@@ -186,15 +187,33 @@ const Cart = () => {
     }
 
     if (isAuthenticated) {
-      dispatch(
-        postUserCart({
-          orderComment,
-          paymentType,
-          deliveryMethod,
-          devices,
-          promocode,
-        })
-      );
+      if(deliveryMethod === "delivery") {
+        if(address) {
+          dispatch(
+              postUserCart({
+                orderComment,
+                paymentType,
+                deliveryMethod,
+                devices,
+                promocode,
+                address
+              })
+          );
+        } else {
+          setAddressError("Введите адрес доставки");
+        }
+      } else if(deliveryMethod === "selfPickUp") {
+        dispatch(
+            postUserCart({
+              orderComment,
+              paymentType,
+              deliveryMethod,
+              devices,
+              promocode,
+              address: "Кенен Азербаев 2"
+            })
+        );
+      }
     } else {
       dispatch(closeCart());
       dispatch(openSingInModal());
@@ -617,7 +636,7 @@ const Cart = () => {
               </div>
               <div style={{ marginTop: "10px" }}>
                 <label
-                  for="address"
+                  htmlFor="address"
                   style={{
                     paddingLeft: "10px",
                     fontWeight: "600",
@@ -634,18 +653,22 @@ const Cart = () => {
                   name="address"
                   id="address"
                   value={
-                    deliveryMethod == "delivery" ? address : "Кенен Назарбаев 2"
+                    deliveryMethod === "delivery" ? address : "Кенен Азербаев 2"
                   }
                   disabled={deliveryMethod !== "delivery"}
                   onChange={(e) => {
+                    setAddressError("");
                     setAddress(e.target.value);
                   }}
                 />
+                {addressError && (<p className={"error_message"}>
+                    {addressError}
+                </p>)}
               </div>
 
               <div style={{ marginTop: "10px" }}>
                 <label
-                  for="promocode"
+                  htmlFor="promocode"
                   style={{
                     paddingLeft: "10px",
                     fontWeight: "600",
