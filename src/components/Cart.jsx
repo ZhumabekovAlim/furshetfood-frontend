@@ -655,7 +655,7 @@ const Cart = () => {
                 <input
                   type="text"
                   className="order-promocode"
-                  style={{ marginTop: "5px" }}
+                  style={{ marginTop: "5px", opacity: 1 }}
                   placeholder="Введите адрес доставки"
                   name="address"
                   id="address"

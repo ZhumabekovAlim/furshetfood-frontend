@@ -1,40 +1,39 @@
 import React, { useState, useRef, useEffect } from "react";
-
 import axios from "../axios";
 import { useSelector } from "react-redux";
 import Skeleton from "react-loading-skeleton";
 
-import Slider from '/images/banner_picture.svg';
-import BunnerBtn from '/Icons/banner_btn.svg';
+import Slider from "/images/banner_picture.svg";
+import BunnerBtn from "/Icons/banner_btn.svg";
 
 import "../styles/Banner.css";
 import { banners } from "../constants/URLs";
 
 const Banner = () => {
   const [slides, setSlides] = useState([]);
-
-  const [currentIndex, setCurrentIndex] = useState(slides.length);
-  const [slide, setSlide] = useState(true);
-  const setIntervalRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [slide, setSlide] = useState(true); // отвечает за автоматическую смену
+  const intervalRef = useRef(null);
   const [startX, setStartX] = useState(0);
-  const [endX, setEndX] = useState(0); 
+  const [endX, setEndX] = useState(0);
 
   const { isLoading } = useSelector((state) => state.auth);
 
   const nextSlide = () => {
-    const nextIndex = currentIndex + 1;
-    if (nextIndex < slides.length) {
-      setCurrentIndex(nextIndex);
-    } else {
-      setCurrentIndex(0);
-    }
+    setCurrentIndex((prevIndex) =>
+      prevIndex + 1 < slides.length ? prevIndex + 1 : 0
+    );
   };
-  
 
   const prevSlide = () => {
-    setCurrentIndex((currIndex) =>
-      currIndex === 0 ? slides.length - 1 : currIndex - 1
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? slides.length - 1 : prevIndex - 1
     );
+  };
+
+  const toggleStateSlide = () => {
+    // Переключение режима авто-слайда
+    setSlide((prev) => !prev);
   };
 
   const handleTouchStart = (e) => {
@@ -55,49 +54,69 @@ const Banner = () => {
     toggleStateSlide();
   };
 
+  // Эффект для загрузки слайдов
   useEffect(() => {
-    axios.get(banners)
+    axios
+      .get(banners)
       .then((response) => {
         setSlides(response.data);
       })
       .catch((e) => console.log("Error while fetching banners img", e));
+  }, []);
 
-    if (slide.length) {
-      setIntervalRef.current = setInterval(nextSlide, 4500);
+  // Эффект для автоматического переключения слайдов
+  useEffect(() => {
+    if (slide && slides.length > 0) {
+      intervalRef.current = setInterval(() => {
+        nextSlide();
+      }, 4500);
     } else {
-      clearInterval(setIntervalRef.current);
+      clearInterval(intervalRef.current);
     }
-    return () => clearInterval(setIntervalRef.current); 
-  }, [slide])
 
-  const toggleStateSlide = () => {
-    setSlide((currStateSlide) => !currStateSlide);
-  };
-
+    return () => clearInterval(intervalRef.current);
+  }, [slide, slides.length]); // перезапускаем интервал, если изменилось состояние автослайда или количество слайдов
 
   return (
     <div className="slider">
-      {isLoading ? ( <Skeleton height={271}/> ) : (
+      {isLoading ? (
+        <Skeleton height={271} />
+      ) : (
         <>
-          <div className="slider_wrapper" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
-            <div className="slider-btn prev" onClick={prevSlide} onMouseEnter={toggleStateSlide} onMouseLeave={toggleStateSlide}>
+          <div
+            className="slider_wrapper"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div
+              className="slider-btn prev"
+              onClick={prevSlide}
+              onMouseEnter={toggleStateSlide}
+              onMouseLeave={toggleStateSlide}
+            >
               <img src={BunnerBtn} alt="Назад" />
             </div>
             <div className="slides_wrapper">
-              <div 
+              <div
                 className="slides"
                 style={{
                   transform: `translateX(-${currentIndex * 100}%)`,
-                }}  
+                }}
               >
                 {slides.map((item, index) => (
-                  <div className="slide" key={index}> 
+                  <div className="slide" key={index}>
                     <img src={item.image} alt={item.title} />
                   </div>
                 ))}
               </div>
             </div>
-            <div className="slider-btn next" onClick={nextSlide}  onMouseEnter={toggleStateSlide} onMouseLeave={toggleStateSlide}>
+            <div
+              className="slider-btn next"
+              onClick={nextSlide}
+              onMouseEnter={toggleStateSlide}
+              onMouseLeave={toggleStateSlide}
+            >
               <img src={BunnerBtn} alt="Вперед" />
             </div>
           </div>
