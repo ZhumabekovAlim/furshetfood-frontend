@@ -57,7 +57,7 @@ const ProfileModal = () => {
 
     return (
         <div className="profile_modal">
-            <div className="profile_modal_wrapper">
+            <div className={currentProfileWindow === 0 ? "profile_modal_wrapper1" : "profile_modal_wrapper"}>
                 {currentProfileWindow === 0 && (
                     <div className="profile_modal_inner">
                         <div className="profile_modal_header">

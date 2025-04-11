@@ -1,18 +1,31 @@
-.profile_modal {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  z-index: 10;
-  top: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.32);
-  transition: background 0.3s;
-}
+/*.profile_modal {*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*  position: fixed;*/
+/*  z-index: 10;*/
+/*  top: 0;*/
+/*  right: 0;*/
+/*  background: rgba(0, 0, 0, 0.32);*/
+/*  transition: background 0.3s;*/
+/*}*/
 
 .profile_modal_wrapper {
   position: absolute;
-  top: 85px;
-  right: 322px;
+  top: 45px;
+  z-index: 10;
+  right: 0px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 20px;
+  width: 380px;
+}
+
+.profile_modal_wrapper1 {
+  position: absolute;
+  top: 45px;
+  z-index: 10;
+  right: 0px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 20px;
 }
 
 .profile_modal_inner {
@@ -33,7 +46,6 @@
   padding: 36px 30px 40px 30px;
   width: 100%;
   max-width: 320px;
-  max-height: 535px;
   border-radius: 20px;
   overflow: auto;
 }
@@ -168,22 +180,16 @@
   font-size: 15px;
 }
 
-@media (max-width: 1440px) and (min-width: 1024px) {
-  .profile_modal_wrapper {
-    top: 75px;
-    right: 188px;
-  }
-}
-
-@media (max-width: 1024px) and (min-width: 768px) {
-  .profile_modal_wrapper {
-    top: 75px;
-    right: 158px;
-  }
-}
-
 @media (max-width: 768px) {
   .profile_modal {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.32);
+    transition: background 0.3s;
     display: flex;
     justify-content: center;
     align-items: center;

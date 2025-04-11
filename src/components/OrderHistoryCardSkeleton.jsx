@@ -8,11 +8,11 @@ function OrderHistoryCardSkeleton({ cardCount }) {
     <div className="card_history_wrapper" key={index}>
         <div className="card_history_inner">
             <div className="card_history_top">
-                <Skeleton width={80}/>
+                <Skeleton width={120}/>
                 <Skeleton width={30}/>
             </div>
             <div className="card_history_bottom">
-                <Skeleton height={120}/>
+                <Skeleton height={120} width={320}/>
             </div>
         </div>
     </div>
