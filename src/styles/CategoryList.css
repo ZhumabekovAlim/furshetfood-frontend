@@ -10,6 +10,10 @@
 
 .product__item_desc_wrapper {
   padding: 6px 20px 15px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .product_item_price {
@@ -139,6 +143,12 @@
   }
   .product_item_add_to_busket span {
     font-size: 14px;
+  }
+
+  .product_item img {
+    width: 100px;
+    height: 100px;
+    max-height: unset;
   }
 }
 

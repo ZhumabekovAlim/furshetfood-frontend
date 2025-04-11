@@ -8,7 +8,7 @@ import { cart, cartGuest } from "../constants/URLs";
 import { getUserCart, getGuestCart } from "../features/cartSlice";
 import { openFood } from "../features/foodInfo";
 
-import { setRandomItems } from "../features/randomExtraItems";
+import { setRandomItems, setRandomOffers } from "../features/randomExtraItems";
 
 import LoadingModal from "./LoadingModal";
 import ProductSkeletonCategory from "./ProductSkeletonCategory";
@@ -29,13 +29,15 @@ const CategoryList = ({ url, onActiveCategoryChange }) => {
     axios
       .get(url)
       .then((response) => {
-        console.log("response est");
+        console.log("response est", response.data);
         setMenuCategoryItem(response.data);
         setFetchingData(false);
+
         const allItems = response.data.reduce((acc, category) => {
           return [...acc, ...category.items];
         }, []);
 
+        // 🔹 1. Рандом из всех, кроме "Приборы"
         if (allItems.length) {
           const filteredItems = allItems.filter(
             (item) => item.name !== "Приборы"
@@ -44,6 +46,22 @@ const CategoryList = ({ url, onActiveCategoryChange }) => {
             .sort(() => Math.random() - 0.5)
             .slice(0, 3);
           dispatch(setRandomItems(randomItems));
+        }
+
+        // 🔹 2. Рандом из категорий "Салаты" и "Напитки"
+        const offerCategories = response.data.filter((category) =>
+          ["Салаты", "Напитки"].includes(category.name)
+        );
+
+        const offerItems = offerCategories.reduce((acc, category) => {
+          return [...acc, ...category.items];
+        }, []);
+
+        if (offerItems.length) {
+          const randomOffers = offerItems
+            .sort(() => Math.random() - 0.5)
+            .slice(0, 3);
+          dispatch(setRandomOffers(randomOffers));
         }
       })
       .catch((error) => console.log("ERROR caught category list: ", error));
@@ -192,8 +210,6 @@ const CategoryList = ({ url, onActiveCategoryChange }) => {
     }
   };
 
-  menuCategoryItem && console.log(JSON.stringify(menuCategoryItem, null, 2));
-
   return (
     <>
       {loading && <LoadingModal />}
@@ -281,11 +297,12 @@ const CategoryList = ({ url, onActiveCategoryChange }) => {
                                   </svg>
                                 </button>
                               </div>
-                              {product.discount_price && (
-                                <div className="product_item_price-discount">
-                                  {Math.round(product.regular_price)} ₸
-                                </div>
-                              )}
+                              {product.discount_price &&
+                                product.discount_percentage !== "0.00" && (
+                                  <div className="product_item_price-discount">
+                                    {Math.round(product.regular_price)} ₸
+                                  </div>
+                                )}
                             </>
                           ) : (
                             <>
@@ -317,11 +334,12 @@ const CategoryList = ({ url, onActiveCategoryChange }) => {
                                   />
                                 </svg>
                               </button>
-                              {product.discount_price && (
-                                <div className="product_item_price-discount">
-                                  {Math.round(product.regular_price)} ₸
-                                </div>
-                              )}
+                              {product.discount_price &&
+                                product.discount_percentage !== "0.00" && (
+                                  <div className="product_item_price-discount">
+                                    {Math.round(product.regular_price)} ₸
+                                  </div>
+                                )}
                             </>
                           )}
                         </div>

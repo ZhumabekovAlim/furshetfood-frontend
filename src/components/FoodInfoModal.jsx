@@ -126,7 +126,14 @@ function FoodInfoModal() {
           <div className="food_info__info">
             <div className="food_info_ttl">{dataInfo.name}</div>
             <div className="food_info_weight">{dataInfo.weight}</div>
-            <div className="food_info_desc">{dataInfo.description}</div>
+            <div className="food_info_desc">
+              {dataInfo.description.split("/n").map((line, index) => (
+                <React.Fragment key={index}>
+                  {line}
+                  <br />
+                </React.Fragment>
+              ))}
+            </div>
             <div
               style={{
                 display: "flex",
@@ -135,11 +142,12 @@ function FoodInfoModal() {
                 justifyContent: "flex-end",
               }}
             >
-              {dataInfo?.discount_price && (
-                <span className="product_item_price-discount">
-                  {Math.round(dataInfo.regular_price)} ₸
-                </span>
-              )}
+              {dataInfo?.discount_price &&
+                dataInfo?.discount_percentage !== "0.00" && (
+                  <span className="product_item_price-discount">
+                    {Math.round(dataInfo.regular_price)} ₸
+                  </span>
+                )}
               {dataInfo?.discount_price ? (
                 <div className="food_info_price">
                   {Math.round(dataInfo.discount_price)} тг
@@ -247,7 +255,11 @@ function FoodInfoModal() {
                     <img src={item.image_path} alt={item.name} />
                     <div className="product__item_desc_wrapper">
                       <div className="product_item_info">
-                        <div className="product_item_title">{item.name}</div>
+                        <div className="product_item_title">
+                          {item.name.length > 15
+                            ? item.name.slice(0, 15) + "…"
+                            : item.name}
+                        </div>
                         <div className="product_item_desc">{item.weight}</div>
                         <div className="product_item_desc">
                           {item.description}
@@ -302,11 +314,12 @@ function FoodInfoModal() {
                                 </svg>
                               </button>
                             </div>
-                            {item.discount_price && (
-                              <div className="product_item_price-discount">
-                                {Math.round(item.regular_price)} ₸
-                              </div>
-                            )}
+                            {item.discount_price &&
+                              item.discount_percentage !== "0.00" && (
+                                <div className="product_item_price-discount">
+                                  {Math.round(item.regular_price)} ₸
+                                </div>
+                              )}
                           </>
                         ) : (
                           // Если товара нет в корзине, показываем кнопку добавления
@@ -336,11 +349,12 @@ function FoodInfoModal() {
                                 />
                               </svg>
                             </button>
-                            {item.discount_price && (
-                              <div className="product_item_price-discount">
-                                {Math.round(item.regular_price)} ₸
-                              </div>
-                            )}
+                            {item.discount_price &&
+                              item.discount_percentage !== "0.00" && (
+                                <div className="product_item_price-discount">
+                                  {Math.round(item.regular_price)} ₸
+                                </div>
+                              )}
                           </>
                         )}
                       </div>

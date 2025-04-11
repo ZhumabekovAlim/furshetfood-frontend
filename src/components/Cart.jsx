@@ -36,7 +36,9 @@ const Cart = () => {
     useSelector((state) => state.cart);
   const totalAmount = useSelector(selectTotalAmount);
 
-  const moreItems = useSelector((state) => state.randomItems.randomItems);
+  const { randomItems: moreItems, randomOffers } = useSelector(
+    (state) => state.randomItems
+  );
 
   const [isDeliveryOption, setDeliveryOption] = useState(false);
   const [isCommentOpen, setIsCommentOpen] = useState(false);
@@ -47,6 +49,7 @@ const Cart = () => {
   const [promocodeError, setPromocodeError] = useState("");
   const [categories, setCategories] = useState(null);
   const [tools, setTools] = useState(null);
+  const [address, setAddress] = useState("");
 
   const [cartItems, setCartItems] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -331,7 +334,7 @@ const Cart = () => {
               <div className="add_more">
                 <h2>Добавить еще</h2>
                 <div className="line_list">
-                  {moreItems.map((item) => (
+                  {randomOffers.map((item) => (
                     <div
                       className="line_item"
                       key={item.id}
@@ -340,8 +343,31 @@ const Cart = () => {
                       <div className="item_img">
                         <img src={item.image_path} alt={item.name} />
                       </div>
-                      <div className="item_ttl">{item.name}</div>
-                      <div className="item_price">{item.price}</div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "space-between",
+                          height: "100%",
+                        }}
+                      >
+                        <div
+                          className="item_ttl"
+                          style={{ fontWeight: 600, fontSize: "0.8rem" }}
+                        >
+                          <p style={{ margin: 0 }}>
+                            {item.name.length > 15
+                              ? item.name.slice(0, 15) + "…"
+                              : item.name}
+                          </p>
+                        </div>
+                        <div className="item_price">
+                          {item?.discount_price
+                            ? Math.round(item?.discount_price)
+                            : Math.round(item?.regular_price)}{" "}
+                          ₸
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -401,7 +427,11 @@ const Cart = () => {
                       <div className="option_img">
                         <img src={DeliveryIcon} alt="Иконка доставки" />
                       </div>
-                      <div className="option_ttl">Способ доставки</div>
+                      <div className="option_ttl">
+                        {deliveryMethod === "delivery"
+                          ? "Доставка"
+                          : "Самовывоз"}
+                      </div>
                     </div>
                     <div
                       className="option_arrow"
@@ -585,16 +615,58 @@ const Cart = () => {
                   </div>
                 )}
               </div>
+              <div style={{ marginTop: "10px" }}>
+                <label
+                  for="address"
+                  style={{
+                    paddingLeft: "10px",
+                    fontWeight: "600",
+                    fontSize: "17px",
+                  }}
+                >
+                  Адрес
+                </label>
+                <input
+                  type="text"
+                  className="order-promocode"
+                  style={{ marginTop: "5px" }}
+                  placeholder="Введите адрес доставки"
+                  name="address"
+                  id="address"
+                  value={
+                    deliveryMethod == "delivery" ? address : "Кенен Назарбаев 2"
+                  }
+                  disabled={deliveryMethod !== "delivery"}
+                  onChange={(e) => {
+                    setAddress(e.target.value);
+                  }}
+                />
+              </div>
 
-              <input
-                type="text"
-                className="order-promocode"
-                placeholder="Введите промокод"
-                value={promocode}
-                onChange={(e) => {
-                  setPromocode(e.target.value);
-                }}
-              />
+              <div style={{ marginTop: "10px" }}>
+                <label
+                  for="promocode"
+                  style={{
+                    paddingLeft: "10px",
+                    fontWeight: "600",
+                    fontSize: "17px",
+                  }}
+                >
+                  Промокод
+                </label>
+                <input
+                  type="text"
+                  className="order-promocode"
+                  placeholder="Введите промокод"
+                  style={{ marginTop: "5px" }}
+                  name="promocode"
+                  id="promocode"
+                  value={promocode}
+                  onChange={(e) => {
+                    setPromocode(e.target.value);
+                  }}
+                />
+              </div>
               {promocodeError && (
                 <p style={{ color: "red", fontSize: "0.8em" }}>
                   {promocodeError}
@@ -609,10 +681,8 @@ const Cart = () => {
                 <div className="total_amount">
                   <h2>
                     {isAuthenticated
-                      ? formatPrice(
-                          Math.max(totalAmount - userInfo.userBonus_points, 0)
-                        )
-                      : formatPrice(totalAmount)}
+                      ? Math.round(totalAmount - userInfo.userBonus_points, 0)
+                      : Math.round(totalAmount)}
                   </h2>
                 </div>
               </div>

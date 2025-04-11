@@ -125,13 +125,13 @@ const CartAddedItem = ({ itmeKey, item }) => {
           </div>
         </div>
         <div className="cart_item_desc">
-          <div className="cart_item_weight">{detail.weight}</div>
           <div className="cart_item_price">
-            {(
+            {Math.round(
               (detail.discount_price || detail.regular_price) * quantity
-            ).toFixed(2)}{" "}
+            )}{" "}
             ₸
           </div>
+          <div className="cart_item_weight">{detail.weight}</div>
         </div>
       </div>
     </div>

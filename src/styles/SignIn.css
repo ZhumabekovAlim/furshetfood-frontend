@@ -136,3 +136,17 @@
     min-height: 50px;
   }
 }
+
+@media (max-width: 500px) {
+  .signIn_modal_container .signIn_description br {
+    display: none;
+  }
+
+  .signIn_modal_container .signIn_agreement br {
+    display: none;
+  }
+
+  .signIn_form_input_wrapper input {
+    font-size: 30px;
+  }
+}

@@ -17,13 +17,31 @@ const SetHeader = (props) => {
     });
   }, [props.url]);
 
+  const handleNavItemClick = (cat) => {
+    const targetElement = document.getElementById(`category-${cat.id}`);
+    if (targetElement) {
+      const elementPosition =
+        targetElement.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - 65;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
   if (loading) return <SetHedaerSkeleton categoryCount={11} />;
 
   return (
     <>
       {loading && <SetHedaerSkeleton categoryCount={11} />}
       {menuHeader.map((item) => (
-        <div className="menuHeader" key={item.id}>
+        <div
+          onClick={() => handleNavItemClick(item)}
+          className="menuHeader"
+          key={item.id}
+        >
           <div className="menu_title">{item.name}</div>
         </div>
       ))}
