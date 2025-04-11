@@ -233,13 +233,14 @@ const CategoryList = ({ url, onActiveCategoryChange }) => {
                     (cartItem) => cartItem.item_id === product.id
                   );
                   return (
-                    <div className="product_item" key={product.id}>
+                    <div
+                        onClick={() =>
+                            dispatch(openFood({ foodId: product.id }))
+                        } className="product_item" key={product.id}>
                       <img
                         src={product.image_path}
                         alt={"img"}
-                        onClick={() =>
-                          dispatch(openFood({ foodId: product.id }))
-                        }
+                        style={{width: '100%'}}
                       />
                       <div className="product__item_desc_wrapper">
                         <div className="product_item_info">
@@ -255,7 +256,10 @@ const CategoryList = ({ url, onActiveCategoryChange }) => {
                             <>
                               <div className="product_item_in_cart">
                                 <button
-                                  onClick={() => cartItemMinus(product.id)}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    cartItemMinus(product.id);
+                                  }}
                                 >
                                   {/* Иконка */}
                                   <svg
@@ -280,7 +284,10 @@ const CategoryList = ({ url, onActiveCategoryChange }) => {
                                   }
                                 </span>
                                 <button
-                                  onClick={() => cartItemPlus(product.id)}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    cartItemPlus(product.id);
+                                  }}
                                 >
                                   {/* Иконка */}
                                   <svg
@@ -307,9 +314,10 @@ const CategoryList = ({ url, onActiveCategoryChange }) => {
                           ) : (
                             <>
                               <button
-                                onClick={() =>
-                                  handleAddToCart(product.id, product.item_type)
-                                }
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleAddToCart(product.id, product.item_type);
+                                }}
                                 key={product.id}
                               >
                                 <span>

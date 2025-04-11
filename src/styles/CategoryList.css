@@ -3,13 +3,17 @@
   font-weight: 500;
 }
 
+.product_item:focus {
+  outline: none;
+}
+
 .product_item_desc {
   color: #6d6d6d;
   font-size: 14px;
 }
 
 .product__item_desc_wrapper {
-  padding: 6px 20px 15px 20px;
+  padding: 6px 10px 15px 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

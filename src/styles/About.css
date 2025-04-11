@@ -83,6 +83,40 @@ h3 {
   grid-gap: 19px;
 }
 
+@media (max-width: 1024px) {
+  .buttons_container {
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .delivery_method,
+  .corporate_order {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 10px;
+  }
+
+  .order_title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .button {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .contact_button {
+    padding: 10px;
+  }
+
+  .corporate_order {
+    max-width: none;
+  }
+}
+
 @media (max-width: 768px) {
   .buttons_container {
     flex-direction: row;

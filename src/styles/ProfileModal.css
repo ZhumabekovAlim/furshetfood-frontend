@@ -16,7 +16,8 @@
   right: 0px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 20px;
-  width: 380px;
+  min-width: 360px;
+  width: 100%;
 }
 
 .profile_modal_wrapper1 {
@@ -43,7 +44,7 @@
   flex-direction: column;
   max-height: 535px;
   background-color: #fff;
-  padding: 36px 30px 40px 30px;
+  padding: 30px 20px 30px 20px;
   width: 100%;
   max-width: 320px;
   border-radius: 20px;
@@ -197,6 +198,17 @@
 
   .profile_modal_wrapper {
     position: static;
+  }
+
+  .profile_modal_wrapper {
+    position: static;
+    top: 45px;
+    z-index: 10;
+    right: 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 20px;
+    max-width: 360px;
+    width: 100%;
   }
 
   .profile_back_btn {

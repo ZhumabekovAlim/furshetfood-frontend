@@ -53,6 +53,7 @@ const ProfileModal = () => {
 
     useEffect(() => {
         dispatch(getUserHistory())
+        console.log(userHistory);
     }, [dispatch]);
 
     return (

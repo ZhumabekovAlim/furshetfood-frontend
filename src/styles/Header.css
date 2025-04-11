@@ -85,6 +85,10 @@
         display: flex;
         justify-content: space-between;
     }
+    
+    .header {
+        position: relative;
+    }
 
     .header__logo {
         margin: 0 auto;

@@ -28,14 +28,11 @@ function OrderHistoryCard({ userHistory }) {
                   return (
                     <div className="food_item">
                       <div className="food-left">
-                        <div className="food_img">
-                          <img
-                            src={`https://158.179.207.250/furshet/storage/${item.image_path}`}
-                            alt={item.name}
-                          />
+                        <div className="food_mddl" style={{width: '150px'}}>
+                          <div className="food_ttl">{item?.item?.name}</div>
                         </div>
-                        <div className="food_mddl">
-                          <div className="food_ttl">{item.name}</div>
+                        <div className="food_mddl" style={{width: '50px'}}>
+                          <div className="food_ttl">{item.quantity}</div>
                         </div>
                       </div>
                       <div className="food_price">
