@@ -193,6 +193,7 @@ const Cart = () => {
         })
       );
     } else {
+      dispatch(closeCart());
       dispatch(openSingInModal());
     }
   };

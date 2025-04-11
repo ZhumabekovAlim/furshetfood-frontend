@@ -28,13 +28,17 @@ const Footer = () => {
           </div>
           <div className="footer_subsections">
             <div className="footer_wrapper_title">Адрес самовывоза:</div>
-            <div className="center_desc">
+            <a
+              href="https://go.2gis.com/i11Ep"
+              style={{ color: "#000", fontWeight: "400" }}
+              className="center_desc"
+            >
               Астана,
               <br />
               Кенен Азербаев 2<br />
               (Заезд сзади дома)
               <br />
-            </div>
+            </a>
             {/* <div style={{ width: "100px", height: "100px" }}>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d504.6206120948882!2d71.50547631512016!3d51.12763915414726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x424583cf6e3365a1%3A0x6836b51765cba2a5!2z0YPQuy4g0JrQtdC90LXQvdCwINCQ0LfQtdGA0LHQsNC10LLQsCAy!5e0!3m2!1sru!2skz!4v1744289786471!5m2!1sru!2skz"

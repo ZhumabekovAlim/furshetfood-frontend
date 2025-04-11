@@ -135,12 +135,20 @@ function FoodInfoModal() {
                 justifyContent: "flex-end",
               }}
             >
-              <span className="product_item_price-discount">
-                {Math.round(dataInfo.discount_price)} ₸
-              </span>
-              <div className="food_info_price">
-                {Math.round(dataInfo.regular_price)} тг
-              </div>
+              {dataInfo?.discount_price && (
+                <span className="product_item_price-discount">
+                  {Math.round(dataInfo.regular_price)} ₸
+                </span>
+              )}
+              {dataInfo?.discount_price ? (
+                <div className="food_info_price">
+                  {Math.round(dataInfo.discount_price)} тг
+                </div>
+              ) : (
+                <div className="food_info_price">
+                  {Math.round(dataInfo.regular_price)} тг
+                </div>
+              )}
             </div>
             {cartItems.some((item) => item.item_id === dataInfo.id) ? (
               <div
