@@ -75,6 +75,13 @@
 }
 
 @media (max-width: 500px) {
+  .footer_inner {
+    margin: 1rem auto 0 auto;
+    padding: 0;
+  }
+  .footer_logo {
+    display: none;
+  }
   .footer_wrapper {
     margin-top: 42px;
   }
@@ -88,17 +95,21 @@
   }
 
   .footer_wrapper_title {
-    font-size: 12px;
+    font-size: 1rem;
     margin-bottom: 7px;
   }
 
+  .footer_subsections a {
+    font-size: 0.8rem;
+  }
+
   .work_schedule {
-    font-size: 10px;
+    font-size: 0.8rem;
     margin-bottom: 5px;
   }
 
   .work_schedule_desc {
-    font-size: 10px;
+    font-size: 0.8rem;
   }
 
   .center_desc {
@@ -124,15 +135,19 @@
     margin-top: 20px;
   }
 
+  .footer_right a {
+    display: none;
+  }
+
   .filial {
     display: none;
   }
 
   .policy_title {
-    font-size: 12px;
+    font-size: 1rem;
   }
 
   .policy_desc {
-    font-size: 10px;
+    font-size: 0.7rem;
   }
 }

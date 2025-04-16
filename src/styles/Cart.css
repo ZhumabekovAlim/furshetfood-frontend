@@ -246,6 +246,7 @@ input[type="number"] {
 .order-promocode::placeholder {
   font-size: 16px;
   font-weight: 500;
+  color: #999;
 }
 
 .order-promocode {

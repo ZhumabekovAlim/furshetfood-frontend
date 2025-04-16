@@ -135,11 +135,11 @@
     /* text-align: left; */
   }
   .adverts_innerr h2 {
-    font-size: 1em;
+    font-size: 1rem;
     /* text-align: left; */
   }
   .adverts_innerr .desc {
-    font-size: 0.8em;
+    font-size: 1rem;
     text-align: center;
   }
   .adverts_innerr .desc br {
@@ -164,8 +164,11 @@
     order: 2;
   }
   .adverts_left img {
-    height: 285px;
+    /* display: none; */
+    /* height: 285px; */
+    height: auto;
     width: 100%;
+    margin: 0 auto;
     /* position: relative; */
     /* top: 0; */
   }

@@ -33,9 +33,9 @@
   background-color: #fff;
   padding: 36px 30px 40px 30px;
   width: 100vw;
-  height: 100vh;
+  /* height: 100vh; */
   max-width: 400px;
-  max-height: 266px;
+  /* max-height: 266px; */
   border-radius: 20px;
 }
 

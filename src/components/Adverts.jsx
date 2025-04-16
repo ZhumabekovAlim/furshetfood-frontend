@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import AdvertasmentBanner from "/images/phone.svg";
+import Advertisement from "/images/phone.png";
 import WhatsappIcon from "/Icons/whatsapp.svg";
 import InstagramIcon from "/Icons/instagram.svg";
 import TikTokIcon from "/Icons/tiktok.svg";
@@ -9,11 +10,21 @@ import WhatsappButton from "/Icons/logos_whatsapp-icon.svg";
 import "../styles/Adverts.css";
 
 function Adverts() {
+  const [isIOS, setIsIOS] = useState(false);
+
+  useEffect(() => {
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      setIsIOS(true);
+    }
+  }, []);
   return (
     <div className="adverts_wrapper" id="adverts_wrapper">
       <div className="adverts_innerr">
         <div className="adverts_left">
-          <img src={AdvertasmentBanner} alt="Рекламный баннер" />
+          <img
+            src={isIOS ? Advertisement : AdvertasmentBanner}
+            alt="Рекламный баннер"
+          />
         </div>
         <div className="adverts_right">
           <h1>Мы в соцсетях!</h1>
@@ -58,10 +69,15 @@ function Adverts() {
               Связаться<span>&nbsp;с нами</span>
             </button>
           </a>
-          <div className="desc">
-            <span>Заказы принимаются до 21:00.</span> Доставляем в <br />{" "}
+          <div className="desc" style={{ marginTop: "1rem" }}>
+            {/* <span>Заказы принимаются до 21:00.</span> Доставляем в <br />{" "}
             течение 1,5 часа! Вы можете оплатить заказ <br /> наличными после
-            получения, либо переводом через <br /> Kaspi.
+            получения, либо переводом через <br /> Kaspi. */}
+            <ul style={{ textAlign: "left", paddingLeft: "1.2rem" }}>
+              <li>Заказы принимаются до 21:00.</li>
+              <li>Доставляем в течение 1,5 часа!</li>
+              <li>Оплата картой, предоплата 50% или 100%</li>
+            </ul>
           </div>
         </div>
       </div>

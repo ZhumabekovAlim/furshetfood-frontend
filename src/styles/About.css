@@ -160,4 +160,13 @@ h3 {
     width: 100%;
     padding: 0;
   }
+
+  .button {
+    padding: 10px 0;
+    font-size: 1rem;
+  }
+
+  .order_title {
+    font-size: 1rem;
+  }
 }

@@ -15,14 +15,14 @@ const Footer = () => {
               <div className="work_schedule">Ежедневно 08:00 - 21:00</div>
               <div className="work_schedule_desc">
                 ИП Джапарова ММ
-                <br />
+                {/* <br />
                 Юр. адрес:
                 <br />
                 ПРОСПЕКТ Рақымжан <br />
                 Қошқарбаев, 54 А<br />
                 Астана, Алматы
                 <br />
-                Z19X9X3 (010000)
+                Z19X9X3 (010000) */}
               </div>
             </div>
           </div>
@@ -37,6 +37,14 @@ const Footer = () => {
               <br />
               Кенен Азербаев 2<br />
               (Заезд сзади дома)
+              <br />
+            </a>
+            <a
+              href="https://go.2gis.com/9fyzJ"
+              style={{ color: "#000", fontWeight: "400" }}
+              className="center_desc"
+            >
+              Астана, Кошкарбаева 54а
               <br />
             </a>
             {/* <div style={{ width: "100px", height: "100px" }}>
@@ -60,7 +68,7 @@ const Footer = () => {
       <div className="footer_policy">
         <div className="policy_title">Политика конфиденциальности</div>
         <div className="policy_desc">
-          © 2024 All Rights Reserved by{" "}
+          © 2025 All Rights Reserved by{" "}
           <a href="http://www.nusacorp.com/">Nusa Corporation</a>
         </div>
       </div>

@@ -187,24 +187,7 @@ const Cart = () => {
     }
 
     if (isAuthenticated) {
-      if (deliveryMethod === "delivery") {
-        if (address) {
-          dispatch(
-            postUserCart({
-              comments: orderComment,
-              payment_type: paymentType,
-              devices,
-              promo: promocode,
-              delivery_method:
-                deliveryMethod === "delivery" ? "Доставка" : "Самовывоз",
-              address,
-              use_bonus_points: userInfo.userBonus_points ? true : false,
-            })
-          );
-        } else {
-          setAddressError("Введите адрес доставки");
-        }
-      } else if (deliveryMethod === "selfPickUp") {
+      if (address) {
         dispatch(
           postUserCart({
             comments: orderComment,
@@ -213,10 +196,12 @@ const Cart = () => {
             promo: promocode,
             delivery_method:
               deliveryMethod === "delivery" ? "Доставка" : "Самовывоз",
-            address: "Кенен Азербаев 2",
+            address,
             use_bonus_points: userInfo.userBonus_points ? true : false,
           })
         );
+      } else {
+        setAddressError("Введите адрес доставки");
       }
     } else {
       dispatch(closeCart());
@@ -474,13 +459,19 @@ const Cart = () => {
                     <div className="order_payment_select">
                       <div
                         className="order_payment_option"
-                        onClick={() => setDeliveryMethod("delivery")}
+                        onClick={() => {
+                          setAddress("");
+                          setDeliveryMethod("delivery");
+                        }}
                       >
                         Доставка
                       </div>
                       <div
                         className="order_payment_option"
-                        onClick={() => setDeliveryMethod("selfPickUp")}
+                        onClick={() => {
+                          setAddress("");
+                          setDeliveryMethod("selfPickUp");
+                        }}
                       >
                         Самовывоз
                       </div>
@@ -641,7 +632,7 @@ const Cart = () => {
                   </div>
                 )}
               </div>
-              <div style={{ marginTop: "10px" }}>
+              <div style={{ marginTop: "10px", position: "relative" }}>
                 <label
                   htmlFor="address"
                   style={{
@@ -652,24 +643,51 @@ const Cart = () => {
                 >
                   Адрес
                 </label>
-                <input
-                  type="text"
-                  className="order-promocode"
-                  style={{ marginTop: "5px", opacity: 1 }}
-                  placeholder="Введите адрес доставки"
-                  name="address"
-                  id="address"
-                  value={
-                    deliveryMethod === "delivery" ? address : "Кенен Азербаев 2"
-                  }
-                  disabled={deliveryMethod !== "delivery"}
-                  onChange={(e) => {
-                    setAddressError("");
-                    setAddress(e.target.value);
-                  }}
-                />
+
+                {deliveryMethod === "delivery" ? (
+                  <input
+                    type="text"
+                    className="order-promocode"
+                    style={{ marginTop: "5px", opacity: 1 }}
+                    placeholder="Введите адрес доставки"
+                    name="address"
+                    id="address"
+                    value={address}
+                    onChange={(e) => {
+                      setAddressError("");
+                      setAddress(e.target.value);
+                    }}
+                  />
+                ) : (
+                  <select
+                    className="order-promocode"
+                    style={{
+                      marginTop: "5px",
+                      opacity: 1,
+                      padding: "10px",
+                      fontSize: "16px",
+                      borderRadius: "5px",
+                      width: "100%",
+                      color: address ? "#000" : "#888", // Цвет выбранного адреса (если пусто - серый)
+                    }}
+                    name="address"
+                    id="address"
+                    value={address}
+                    onChange={(e) => {
+                      setAddressError("");
+                      setAddress(e.target.value);
+                    }}
+                  >
+                    <option value="" disabled>
+                      Выберите адрес
+                    </option>
+                    <option value="Кошкарбаева 54а">Кошкарбаева 54а</option>
+                    <option value="Кенен Азербаев 2">Кенен Азербаев 2</option>
+                  </select>
+                )}
+
                 {addressError && (
-                  <p className={"error_message"}>{addressError}</p>
+                  <p className="error_message">{addressError}</p>
                 )}
               </div>
 
@@ -712,7 +730,8 @@ const Cart = () => {
                   <h2>
                     {isAuthenticated
                       ? Math.round(totalAmount - userInfo.userBonus_points, 0)
-                      : Math.round(totalAmount)}
+                      : Math.round(totalAmount)}{" "}
+                    ₸
                   </h2>
                 </div>
               </div>
