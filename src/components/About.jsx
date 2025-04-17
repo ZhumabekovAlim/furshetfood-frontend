@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -8,6 +8,16 @@ import "../styles/About.css";
 import Skeleton from "react-loading-skeleton";
 
 const About = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    if (/android/i.test(userAgent) || /iPhone|iPad|iPod/i.test(userAgent)) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, []);
   const dispatch = useDispatch();
 
   const { deliveryMethod } = useSelector((state) => state.cart);
@@ -16,12 +26,15 @@ const About = () => {
   const getButtonClass = (currentMethod) =>
     `button ${deliveryMethod === currentMethod ? "active" : ""}`;
 
+  const phoneNumber = "+77786496622";
+  const whatsappLink = `https://wa.me/${phoneNumber}`;
+
   return (
     <>
       {isLoading ? (
         <div className="skeleton_wrapper">
-          <Skeleton height={91}/>
-          <Skeleton height={91}/>
+          <Skeleton height={91} />
+          <Skeleton height={91} />
         </div>
       ) : (
         <div className="buttons_container">
@@ -40,12 +53,17 @@ const About = () => {
               >
                 Самовывоз
               </button>
-              <div className="switch_marker" style={{left: deliveryMethod === "selfPickUp" ? "50%" : "0"}}></div>
+              <div
+                className="switch_marker"
+                style={{ left: deliveryMethod === "selfPickUp" ? "50%" : "0" }}
+              ></div>
             </div>
           </div>
           <div className="corporate_order">
             <h2 className="order_title">Корпоративный заказ</h2>
-            <a href="tel:+77752456644"><button className="button contact_button">Связаться</button></a>
+            <a href={isMobile ? `tel:${phoneNumber}` : whatsappLink}>
+              <button className="button contact_button">Связаться</button>
+            </a>
           </div>
         </div>
       )}

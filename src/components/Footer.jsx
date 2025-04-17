@@ -14,7 +14,7 @@ const Footer = () => {
             <div>
               <div className="work_schedule">Ежедневно 08:00 - 21:00</div>
               <div className="work_schedule_desc">
-                ИП Джапарова ММ
+                Furshet Food
                 {/* <br />
                 Юр. адрес:
                 <br />
@@ -41,7 +41,7 @@ const Footer = () => {
             </a>
             <a
               href="https://go.2gis.com/9fyzJ"
-              style={{ color: "#000", fontWeight: "400" }}
+              style={{ color: "#000", fontWeight: "400", marginTop: "0.5rem" }}
               className="center_desc"
             >
               Астана, Кошкарбаева 54а

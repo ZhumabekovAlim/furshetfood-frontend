@@ -44,7 +44,7 @@ const Cart = () => {
   const [isCommentOpen, setIsCommentOpen] = useState(false);
   const [orderComment, setOrderComment] = useState("");
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
-  const [paymentType, setPaymentType] = useState("100% предоплата картой");
+  const [paymentType, setPaymentType] = useState("100% предоплата");
   const [promocode, setPromocode] = useState("");
   const [promocodeError, setPromocodeError] = useState("");
   const [categories, setCategories] = useState(null);
@@ -571,19 +571,15 @@ const Cart = () => {
                     <div className="order_payment_select">
                       <div
                         className="order_payment_option"
-                        onClick={() =>
-                          setPaymentTypeFunc("50% предоплата картой")
-                        }
+                        onClick={() => setPaymentTypeFunc("50% предоплата")}
                       >
-                        50% предоплата картой
+                        50% предоплата
                       </div>
                       <div
                         className="order_payment_option"
-                        onClick={() =>
-                          setPaymentTypeFunc("100% предоплата картой")
-                        }
+                        onClick={() => setPaymentTypeFunc("100% предоплата")}
                       >
-                        100% предоплата картой
+                        100% предоплата
                       </div>
                     </div>
                   )}

@@ -29,14 +29,14 @@ function Adverts() {
         <div className="adverts_right">
           <h1>Мы в соцсетях!</h1>
           <div className="social_media_adverts">
-            <div>
+            <a href="https://www.tiktok.com/@furshetfood.kz">
               <img
                 src={TikTokIcon}
                 alt="Кнопка тик тока"
                 width={30}
                 height={30}
               />
-            </div>
+            </a>
             <div>
               <a href="https://instagram.com/furshetfood.kz?igshid=YmMyMTA2M2Y=">
                 <img
@@ -48,7 +48,7 @@ function Adverts() {
               </a>
             </div>
             <div>
-              <a href="https://wa.me/77786496622">
+              <a href="tel:+77786496622">
                 <img
                   src={WhatsappIcon}
                   alt="Кнопка ватсапа"
@@ -76,7 +76,7 @@ function Adverts() {
             <ul style={{ textAlign: "left", paddingLeft: "1.2rem" }}>
               <li>Заказы принимаются до 21:00.</li>
               <li>Доставляем в течение 1,5 часа!</li>
-              <li>Оплата картой, предоплата 50% или 100%</li>
+              <li>Предоплата 50% или 100%</li>
             </ul>
           </div>
         </div>
