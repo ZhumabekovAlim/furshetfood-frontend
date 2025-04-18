@@ -24,9 +24,11 @@ import CartMobileButton from "./components/CartMobileButton";
 import Skeleton from "react-loading-skeleton";
 import CategoriesSkeleton from "./components/CategoriesSkeleton";
 import StickyNavbar from "./components/Navbar";
+import Anchor from "./components/Anchor";
 
 function App() {
   const [showNavbar, setShowNavbar] = useState(false);
+  const [showAnchor, setShowAnchor] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
   const isCartOpen = useSelector((state) => state.cart.isCartOpen);
   const isSingInOpen = useSelector((state) => state.singIn.isSingInOpen);
@@ -63,7 +65,14 @@ function App() {
 
       // Если пользователь проскроллил вниз и прошел мимо блока категорий (top < 0)
       // Показываем navbar
-      setShowNavbar(top < 0);
+      if (top < 0) {
+        setShowNavbar(true);
+        setShowAnchor(true);
+      } else {
+        // Если пользователь выше блока категорий (top >= 0), скрываем якорь
+        setShowNavbar(false);
+        setShowAnchor(false);
+      }
     };
 
     handleScroll(); // Проверим сразу при монтировании
@@ -140,6 +149,7 @@ function App() {
         activeCategory={activeCategory}
         showNavbar={showNavbar}
       />
+      <Anchor showAnchor={showAnchor} />
       <ToastContainer />
     </div>
   );

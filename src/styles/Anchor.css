@@ -1,0 +1,49 @@
+/* Anchor.css */
+
+.anchor-button {
+  position: fixed;
+  top: 70px;
+  left: 20px;
+  background-color: #f6f6f6;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px; /* Default padding for larger screens */
+  transition: opacity 0.3s ease-in-out;
+}
+
+.anchor-button img {
+  transform: rotate(90deg);
+  border-radius: 2rem;
+  width: 2rem;
+  height: auto;
+  padding: 0.8rem; /* Default padding for larger screens */
+}
+
+/* Медиазапросы для планшетов и мобильных устройств */
+@media (max-width: 768px) {
+  .anchor-button {
+    padding: 8px; /* Уменьшаем паддинг на планшетах */
+  }
+
+  .anchor-button img {
+    width: 1.5rem; /* Уменьшаем размер якоря на планшетах */
+    padding: 0.5rem; /* Уменьшаем padding на планшетах */
+  }
+}
+
+@media (max-width: 500px) {
+  .anchor-button {
+    padding: 5px; /* Еще меньше паддинг на мобильных устройствах */
+    /* border-radius: 50%; Круглая форма на мобильных устройствах */
+    top: auto;
+    left: auto;
+    bottom: 90px;
+    right: 30px;
+  }
+
+  .anchor-button img {
+    width: 1.7rem; /* Уменьшаем размер якоря на мобильных устройствах */
+    padding: 0.3rem; /* Очень маленький padding на мобильных устройствах */
+  }
+}
