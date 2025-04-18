@@ -171,6 +171,7 @@ const Cart = () => {
   };
 
   const handleOrder = async () => {
+    if (!address) return setAddressError("Введите адрес доставки");
     if (promocode) {
       try {
         const res = await axios.get(`/promos/code/${promocode}`);
@@ -683,7 +684,12 @@ const Cart = () => {
                 )}
 
                 {addressError && (
-                  <p className="error_message">{addressError}</p>
+                  <p
+                    className="error_message"
+                    style={{ justifyContent: "flex-start" }}
+                  >
+                    {addressError}
+                  </p>
                 )}
               </div>
 

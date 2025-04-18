@@ -13,7 +13,7 @@ const Footer = () => {
             <div className="footer_wrapper_title">График работы:</div>
             <div>
               <div className="work_schedule">Ежедневно 08:00 - 21:00</div>
-              <div className="work_schedule_desc">
+              <div className="work_schedule">
                 Furshet Food
                 {/* <br />
                 Юр. адрес:
@@ -28,25 +28,35 @@ const Footer = () => {
           </div>
           <div className="footer_subsections">
             <div className="footer_wrapper_title">Адрес самовывоза:</div>
-            <a
-              href="https://go.2gis.com/i11Ep"
-              style={{ color: "#000", fontWeight: "400" }}
-              className="center_desc"
-            >
-              Астана,
-              <br />
-              Кенен Азербаев 2<br />
-              (Заезд сзади дома)
-              <br />
-            </a>
-            <a
-              href="https://go.2gis.com/9fyzJ"
-              style={{ color: "#000", fontWeight: "400", marginTop: "0.5rem" }}
-              className="center_desc"
-            >
-              Астана, Кошкарбаева 54а
-              <br />
-            </a>
+            <p className="city">Астана</p>
+            <ul style={{ marginTop: "0", paddingLeft: "0" }}>
+              <li>
+                <a
+                  href="https://go.2gis.com/i11Ep"
+                  style={{
+                    color: "#000",
+                    fontWeight: "400",
+                    textAlign: "left",
+                  }}
+                  className="center_desc"
+                >
+                  Кенен Азербаев 2 (Заезд сзади дома)
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://go.2gis.com/9fyzJ"
+                  style={{
+                    color: "#000",
+                    fontWeight: "400",
+                    textAlign: "left",
+                  }}
+                  className="center_desc"
+                >
+                  Кошкарбаева 54а
+                </a>
+              </li>
+            </ul>
             {/* <div style={{ width: "100px", height: "100px" }}>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d504.6206120948882!2d71.50547631512016!3d51.12763915414726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x424583cf6e3365a1%3A0x6836b51765cba2a5!2z0YPQuy4g0JrQtdC90LXQvdCwINCQ0LfQtdGA0LHQsNC10LLQsCAy!5e0!3m2!1sru!2skz!4v1744289786471!5m2!1sru!2skz"

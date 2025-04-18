@@ -73,8 +73,22 @@
   color: #0029ff;
   text-decoration: underline;
 }
+.city {
+  margin: 0;
+  align-self: "flex-start";
+  font-weight: "600";
+  font-size: "1rem";
+}
 
 @media (max-width: 500px) {
+  .city {
+    text-align: center;
+    align-self: center;
+    font-size: 0.8rem;
+  }
+  .footer_subsections ul {
+    list-style-type: none;
+  }
   .footer_inner {
     margin: 1rem auto 0 auto;
     padding: 0;

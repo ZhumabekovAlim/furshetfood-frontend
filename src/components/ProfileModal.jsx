@@ -242,7 +242,7 @@ const ProfileModal = () => {
                       className="profile_delete_form_submit"
                       onClick={() => dispatch(logout())}
                     >
-                      Выйти из аккаунт
+                      Выйти из аккаунта
                     </button>
                   </Form>
                 )}
