@@ -25,6 +25,7 @@ import Skeleton from "react-loading-skeleton";
 import CategoriesSkeleton from "./components/CategoriesSkeleton";
 import StickyNavbar from "./components/Navbar";
 import Anchor from "./components/Anchor";
+import SuccessModal from "./components/SuccessModal";
 
 function App() {
   const [showNavbar, setShowNavbar] = useState(false);
@@ -151,6 +152,7 @@ function App() {
       />
       <Anchor showAnchor={showAnchor} />
       <ToastContainer />
+      <SuccessModal />
     </div>
   );
 }

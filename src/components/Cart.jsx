@@ -9,6 +9,7 @@ import {
   removeAllFromCart,
   selectTotalAmount,
   postUserCart,
+  setDisplayModal,
 } from "../features/cartSlice";
 import { openSingInModal } from "../features/singInSlice";
 
@@ -200,7 +201,12 @@ const Cart = () => {
             address,
             use_bonus_points: userInfo.userBonus_points ? true : false,
           })
-        );
+        ).then((res) => {
+          console.log("res:", res);
+          if (res) {
+            dispatch(setDisplayModal(true));
+          }
+        });
       } else {
         setAddressError("Введите адрес доставки");
       }

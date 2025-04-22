@@ -1,25 +1,29 @@
-import { createSlice, createSelector, createAsyncThunk } from '@reduxjs/toolkit';
-import { cart, cartGuest, orders } from '../constants/URLs';
+import {
+  createSlice,
+  createSelector,
+  createAsyncThunk,
+} from "@reduxjs/toolkit";
+import { cart, cartGuest, orders } from "../constants/URLs";
 
 import { toast } from "react-toastify";
 
-import axios from '../axios';
+import axios from "../axios";
 
 export const getUserCart = createAsyncThunk(
-  'getUserCart',
-  async(_, {rejectWithValue}) => {
+  "getUserCart",
+  async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(cart);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.message)
+      return rejectWithValue(error.message);
     }
   }
-)
+);
 
 export const getGuestCart = createAsyncThunk(
-  'getGuestCart',
-  async(_, {rejectWithValue}) => {
+  "getGuestCart",
+  async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(cartGuest);
       return response.data;
@@ -27,43 +31,45 @@ export const getGuestCart = createAsyncThunk(
       return rejectWithValue(error.message);
     }
   }
-)
+);
 
 export const postUserCart = createAsyncThunk(
-  'postUserCart',
-  async(userCart, {rejectWithValue}) => {
+  "postUserCart",
+  async (userCart, { rejectWithValue }) => {
     try {
-      const response = await axios.post(orders, userCart)
-      toast.success("Поздравляю! Вы сделали заказ ожидайте звонка.", {
-        position: "top-center", 
-        autoClose: 5000,
-        draggable: true
-      });
-      return response.data
-    } catch(error) {
+      const response = await axios.post(orders, userCart);
+      //   toast.success("Поздравляю! Вы сделали заказ ожидайте звонка.", {
+      //     position: "top-center",
+      //     autoClose: 5000,
+      //     draggable: true
+      //   });
+      setDisplayModal(true);
+      return response.data;
+    } catch (error) {
       toast.error("Ошибка! Сделайте заказ по-позже", {
-        position: "top-center", 
+        position: "top-center",
         autoClose: 5000,
-        draggable: true
+        draggable: true,
       });
       rejectWithValue(error);
     }
   }
-)
+);
 
 const initialState = {
   items: [],
   devices: 0,
-  deliveryMethod:"delivery",
-  isCartOpen: false, 
+  deliveryMethod: "delivery",
+  isCartOpen: false,
   isCartLoading: false,
   error: null,
+  displayModal: true,
 };
 
 const selectCartItems = (state) => state.cart.items;
 
 const cartSlice = createSlice({
-  name: 'cart',
+  name: "cart",
   initialState,
   reducers: {
     setMethod: (state, action) => {
@@ -79,51 +85,61 @@ const cartSlice = createSlice({
       state.items = [];
     },
     deviceQuantity: (state, action) => {
-      const {quantity} = action.payload;
+      const { quantity } = action.payload;
       if (quantity >= 0) {
         state.devices = quantity;
       } else {
-        return
+        return;
       }
     },
+    setDisplayModal: (state, action) => {
+      state.displayModal = action.payload;
+    },
   },
-  extraReducers: (builder) => 
+  extraReducers: (builder) =>
     builder
-        .addCase(getUserCart.fulfilled, (state, action) => {
-          state.items = action.payload;
-        })
-        .addCase(getUserCart.rejected, (state, action) => {
-          state.error = action.payload;
-        })
-        .addCase(getGuestCart.fulfilled, (state, action) => {
-          state.items = action.payload;
-        })
-        .addCase(getGuestCart.rejected, (state, action) => {
-          state.error = action.payload;
-        })
-        .addCase(postUserCart.pending, (state) => {
-          state.isCartLoading = true;
-        })
-        .addCase(postUserCart.fulfilled, (state) => {
-          state.items = [];
-          state.devices = 1;
-          state.deliveryMethod = "delivery";
-          state.isCartLoading = false;
-        })
-        .addCase(postUserCart.rejected, (state) => {
-          state.isCartLoading = false;
-        })
+      .addCase(getUserCart.fulfilled, (state, action) => {
+        state.items = action.payload;
+      })
+      .addCase(getUserCart.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(getGuestCart.fulfilled, (state, action) => {
+        state.items = action.payload;
+      })
+      .addCase(getGuestCart.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(postUserCart.pending, (state) => {
+        state.isCartLoading = true;
+      })
+      .addCase(postUserCart.fulfilled, (state) => {
+        state.items = [];
+        state.devices = 1;
+        state.deliveryMethod = "delivery";
+        state.isCartLoading = false;
+      })
+      .addCase(postUserCart.rejected, (state) => {
+        state.isCartLoading = false;
+      }),
 });
 
-export const selectTotalAmount = createSelector(
-  selectCartItems,
-  (items) => items.reduce((acc, item) => acc + item.quantity * item.price, 0)
+export const selectTotalAmount = createSelector(selectCartItems, (items) =>
+  items.reduce((acc, item) => acc + item.quantity * item.price, 0)
 );
 
-export const selectTotalQuantity = createSelector(
-  selectCartItems,
-  (items) => items.reduce((acc, item) => acc + item.quantity, 0)
+export const selectTotalQuantity = createSelector(selectCartItems, (items) =>
+  items.reduce((acc, item) => acc + item.quantity, 0)
 );
 
-export const { setMethod, closeCart, toggleCart, addToCart, removeAllFromCart, deviceQuantity, cartItemQuantity } = cartSlice.actions;
+export const {
+  setMethod,
+  closeCart,
+  toggleCart,
+  addToCart,
+  removeAllFromCart,
+  deviceQuantity,
+  cartItemQuantity,
+  setDisplayModal,
+} = cartSlice.actions;
 export default cartSlice.reducer;
