@@ -63,7 +63,7 @@ const initialState = {
   isCartOpen: false,
   isCartLoading: false,
   error: null,
-  displayModal: true,
+  displayModal: false,
 };
 
 const selectCartItems = (state) => state.cart.items;

@@ -12,10 +12,10 @@ function SuccessModal() {
   return (
     <div className="signIn_wrapper">
       <div className="signIn_inner" style={{ top: "0" }}>
-        <div className="signIn_modal_container">
+        <div className="signIn_modal_container success-modal">
           <h2 className="signIn_title">Поздравляю!</h2>
           <p className="signIn_description">
-            Вы сделали заказ ожидайте звонка.
+            Вы сделали заказ, ожидайте звонка.
           </p>
 
           <div className="code-container" style={{ margin: "25px 0 0 0" }}>

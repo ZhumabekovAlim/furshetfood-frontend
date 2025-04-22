@@ -149,4 +149,9 @@
   .signIn_form_input_wrapper input {
     font-size: 30px;
   }
+
+  .signIn_inner .success-modal {
+    padding: 45px 20px 35px 20px;
+    margin: 10px;
+  }
 }
