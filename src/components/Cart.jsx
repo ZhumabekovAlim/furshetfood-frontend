@@ -349,7 +349,50 @@ const Cart = () => {
               <div className="add_more">
                 <h2>Добавить еще</h2>
                 <div className="line_list">
-                  {randomOffers.map((item) => (
+                  {categories?.map((category) => {
+                    if (category.name === "Корзина Добавить еще") {
+                      return category?.items?.map((item) => (
+                        <div
+                          className="line_item"
+                          key={item.id}
+                          onClick={() =>
+                            handleAddToCart(item.id, item.item_type)
+                          }
+                        >
+                          <div className="item_img">
+                            <img src={item.image_path} alt={item.name} />
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "space-between",
+                              height: "100%",
+                            }}
+                          >
+                            <div
+                              className="item_ttl"
+                              style={{ fontWeight: 600, fontSize: "0.8rem" }}
+                            >
+                              <p style={{ margin: 0 }}>
+                                {item.name.length > 15
+                                  ? item.name.slice(0, 15) + "…"
+                                  : item.name}
+                              </p>
+                            </div>
+                            <div className="item_price">
+                              {item?.discount_price
+                                ? Math.round(item?.discount_price)
+                                : Math.round(item?.regular_price)}{" "}
+                              ₸
+                            </div>
+                          </div>
+                        </div>
+                      ));
+                    }
+                  })}
+
+                  {/* randomOffers.map((item) => (
                     <div
                       className="line_item"
                       key={item.id}
@@ -384,7 +427,7 @@ const Cart = () => {
                         </div>
                       </div>
                     </div>
-                  ))}
+                  )) */}
                 </div>
               </div>
               <div className="count_of_devices">
