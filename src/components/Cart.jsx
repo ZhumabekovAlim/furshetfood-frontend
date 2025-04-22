@@ -202,8 +202,8 @@ const Cart = () => {
             use_bonus_points: userInfo.userBonus_points ? true : false,
           })
         ).then((res) => {
-          console.log("res:", res);
           if (res) {
+            dispatch(closeCart());
             dispatch(setDisplayModal(true));
           }
         });
