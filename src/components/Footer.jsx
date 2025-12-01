@@ -13,17 +13,24 @@ const Footer = () => {
             <div className="footer_wrapper_title">График работы:</div>
             <div>
               <div className="work_schedule">Ежедневно 08:00 - 21:00</div>
-              <div className="work_schedule">
-                Furshet Food
-                {/* <br />
-                Юр. адрес:
-                <br />
-                ПРОСПЕКТ Рақымжан <br />
-                Қошқарбаев, 54 А<br />
-                Астана, Алматы
-                <br />
-                Z19X9X3 (010000) */}
-              </div>
+              <a
+                href="/public_offer.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="work_schedule"
+                style={{ display: "block", textDecoration: "underline" }}
+              >
+                Публичная оферта
+              </a>
+              <a
+                href="/privacy_policy.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="work_schedule"
+                style={{ display: "block", textDecoration: "underline" }}
+              >
+                Политика конфиденциальности
+              </a>
             </div>
           </div>
           <div className="footer_subsections">
@@ -76,7 +83,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer_policy">
-        <div className="policy_title">Политика конфиденциальности</div>
+        {/* <div className="policy_title">Политика конфиденциальности</div> */}
         <div className="policy_desc">
           © 2025 All Rights Reserved by{" "}
           <a href="http://www.nusacorp.com/">Nusa Corporation</a>
