@@ -14,7 +14,7 @@ const Footer = () => {
             <div>
               <div className="work_schedule">Ежедневно 08:00 - 21:00</div>
               <a
-                href="/public_offer.pdf"
+                href="/public_offer"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="work_schedule"
@@ -23,7 +23,7 @@ const Footer = () => {
                 Публичная оферта
               </a>
               <a
-                href="/privacy_policy.pdf"
+                href="/privacy_policy"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="work_schedule"
