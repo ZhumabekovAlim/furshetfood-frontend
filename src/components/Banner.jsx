@@ -56,12 +56,9 @@ const Banner = () => {
 
   // Эффект для загрузки слайдов
   useEffect(() => {
-    axios
-      .get(banners)
-      .then((response) => {
-        setSlides(response.data);
-      })
-      .catch((e) => console.log("Error while fetching banners img", e));
+    axios.get(banners).then((response) => {
+      setSlides(response.data);
+    });
   }, []);
 
   // Эффект для автоматического переключения слайдов

@@ -68,16 +68,12 @@ function FoodInfoModal() {
       try {
         const response = await axios.delete(url);
         dispatch(getUserCart());
-      } catch (error) {
-        console.log("Erro while removing item: ", error);
-      }
+      } catch (error) {}
     } else {
       try {
         const response = await axios.delete(url);
         dispatch(getGuestCart());
-      } catch (error) {
-        console.log("Erro while removing item: ", error);
-      }
+      } catch (error) {}
     }
   };
 

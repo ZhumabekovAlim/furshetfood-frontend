@@ -26,7 +26,7 @@ const About = () => {
   const getButtonClass = (currentMethod) =>
     `button ${deliveryMethod === currentMethod ? "active" : ""}`;
 
-  const phoneNumber = "+77786496622";
+  const phoneNumber = "+77076496622";
   const whatsappLink = `https://wa.me/${phoneNumber}`;
 
   return (

@@ -50,9 +50,7 @@ const CodeModal = () => {
               dispatch(closeSingInModal());
               dispatch(phoneModal());
             }, "2000");
-          } catch (error) {
-            console.log("Ошибка: ", error);
-          }
+          } catch (error) {}
         };
         verifyCode();
       }
@@ -72,9 +70,7 @@ const CodeModal = () => {
   const mergingCarts = async () => {
     try {
       const response = await axios.post(cartMerge);
-    } catch (error) {
-      console.log("Error while merging carts: ", error);
-    }
+    } catch (error) {}
   };
 
   const handleClick = () => {
@@ -142,9 +138,7 @@ const CodeModal = () => {
                             dispatch(closeSingInModal());
                             dispatch(phoneModal());
                           }, 2000);
-                        } catch (error) {
-                          console.log("Ошибка: ", error);
-                        }
+                        } catch (error) {}
                       };
                       verifyCode();
                     }

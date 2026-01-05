@@ -48,7 +48,7 @@ function Adverts() {
               </a>
             </div>
             <div>
-              <a href="tel:+77786496622">
+              <a href="tel:+77076496622">
                 <img
                   src={WhatsappIcon}
                   alt="Кнопка ватсапа"
@@ -59,7 +59,7 @@ function Adverts() {
             </div>
           </div>
           <h2>Для сотрудничества пишите в WhatsApp</h2>
-          <a href="https://wa.me/77786496622">
+          <a href="https://wa.me/77076496622">
             <button className="whatsapp_btn">
               <img
                 src={WhatsappButton}

@@ -38,12 +38,6 @@ export const postUserCart = createAsyncThunk(
   async (userCart, { rejectWithValue }) => {
     try {
       const response = await axios.post(orders, userCart);
-      //   toast.success("Поздравляю! Вы сделали заказ ожидайте звонка.", {
-      //     position: "top-center",
-      //     autoClose: 5000,
-      //     draggable: true
-      //   });
-      setDisplayModal(true);
       return response.data;
     } catch (error) {
       toast.error("Ошибка! Сделайте заказ по-позже", {
@@ -51,7 +45,8 @@ export const postUserCart = createAsyncThunk(
         autoClose: 5000,
         draggable: true,
       });
-      rejectWithValue(error);
+
+      return rejectWithValue(error);
     }
   }
 );

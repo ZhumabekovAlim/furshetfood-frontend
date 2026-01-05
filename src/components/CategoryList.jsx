@@ -26,45 +26,41 @@ const CategoryList = ({ url, onActiveCategoryChange }) => {
   const categoryRefs = useRef([]);
 
   useEffect(() => {
-    axios
-      .get(url)
-      .then((response) => {
-        console.log("response est", response.data);
-        setMenuCategoryItem(response.data);
-        setFetchingData(false);
+    axios.get(url).then((response) => {
+      setMenuCategoryItem(response.data);
+      setFetchingData(false);
 
-        const allItems = response.data.reduce((acc, category) => {
-          return [...acc, ...category.items];
-        }, []);
+      const allItems = response.data.reduce((acc, category) => {
+        return [...acc, ...category.items];
+      }, []);
 
-        // 🔹 1. Рандом из всех, кроме "Приборы"
-        if (allItems.length) {
-          const filteredItems = allItems.filter(
-            (item) => item.name !== "Приборы"
-          );
-          const randomItems = filteredItems
-            .sort(() => Math.random() - 0.5)
-            .slice(0, 3);
-          dispatch(setRandomItems(randomItems));
-        }
-
-        // 🔹 2. Рандом из категорий "Салаты" и "Напитки"
-        const offerCategories = response.data.filter((category) =>
-          ["Салаты", "Напитки"].includes(category.name)
+      // 🔹 1. Рандом из всех, кроме "Приборы"
+      if (allItems.length) {
+        const filteredItems = allItems.filter(
+          (item) => item.name !== "Приборы"
         );
+        const randomItems = filteredItems
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 3);
+        dispatch(setRandomItems(randomItems));
+      }
 
-        const offerItems = offerCategories.reduce((acc, category) => {
-          return [...acc, ...category.items];
-        }, []);
+      // 🔹 2. Рандом из категорий "Салаты" и "Напитки"
+      const offerCategories = response.data.filter((category) =>
+        ["Салаты", "Напитки"].includes(category.name)
+      );
 
-        if (offerItems.length) {
-          const randomOffers = offerItems
-            .sort(() => Math.random() - 0.5)
-            .slice(0, 3);
-          dispatch(setRandomOffers(randomOffers));
-        }
-      })
-      .catch((error) => console.log("ERROR caught category list: ", error));
+      const offerItems = offerCategories.reduce((acc, category) => {
+        return [...acc, ...category.items];
+      }, []);
+
+      if (offerItems.length) {
+        const randomOffers = offerItems
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 3);
+        dispatch(setRandomOffers(randomOffers));
+      }
+    });
   }, []);
 
   // Обновляем активную категорию на основе положения блоков
@@ -171,16 +167,12 @@ const CategoryList = ({ url, onActiveCategoryChange }) => {
       try {
         const response = await axios.put(url);
         dispatch(getUserCart());
-      } catch (error) {
-        console.log("Erro while adding item: ", error);
-      }
+      } catch (error) {}
     } else {
       try {
         const response = await axios.put(url);
         dispatch(getGuestCart());
-      } catch (error) {
-        console.log("Erro while adding item: ", error);
-      }
+      } catch (error) {}
     }
   };
 
@@ -191,16 +183,12 @@ const CategoryList = ({ url, onActiveCategoryChange }) => {
       try {
         const response = await axios.delete(url);
         dispatch(getUserCart());
-      } catch (error) {
-        console.log("Erro while removing item: ", error);
-      }
+      } catch (error) {}
     } else {
       try {
         const response = await axios.delete(url);
         dispatch(getGuestCart());
-      } catch (error) {
-        console.log("Erro while removing item: ", error);
-      }
+      } catch (error) {}
     }
   };
 

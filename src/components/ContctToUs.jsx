@@ -45,7 +45,7 @@ function ContctToUs() {
                 open ? "open" : "closed"
               }`}
             >
-              <a href="tel:+77786496622">
+              <a href="tel:+77076496622">
                 <img src={WhatsappIcon} alt="Кнопка ватсапа" />
               </a>
             </div>

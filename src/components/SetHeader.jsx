@@ -9,7 +9,6 @@ const SetHeader = (props) => {
 
   useEffect(() => {
     axios.get(props.url).then((response) => {
-      console.log("setHeader/props.url");
       const filtered = response.data.filter(
         (item) => item.name !== "Другое" && item.name !== "Корзина Добавить еще"
       );

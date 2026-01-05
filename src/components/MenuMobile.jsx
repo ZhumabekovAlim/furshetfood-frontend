@@ -20,6 +20,7 @@ import FSign from "/Icons/FSign.svg";
 import cashbackIcon from "/Icons/cashback_profileModal.svg";
 
 import ProfileModal from "../components/ProfileModal";
+import { Link } from "react-router-dom";
 
 function MenuMobile() {
   const dispatch = useDispatch();
@@ -88,7 +89,11 @@ function MenuMobile() {
               <div className="menu_nav">
                 <div className="menu_nav_item">
                   <img src={homeIcon} alt="Главная" />
-                  <span>Главная</span>
+                  <span>
+                    <Link to={"/"} style={{ color: "black" }}>
+                      Главная
+                    </Link>
+                  </span>
                 </div>
                 <div
                   className="menu_nav_item"
@@ -96,9 +101,17 @@ function MenuMobile() {
                 >
                   <img src={profileIcon} alt="Мой профиль" />
                   {isAuthenticated ? (
-                    <span>Мой профиль</span>
+                    <span>
+                      <Link to={"/"} style={{ color: "black" }}>
+                        Мой профиль
+                      </Link>
+                    </span>
                   ) : (
-                    <span>Войти</span>
+                    <span>
+                      <Link to={"/"} style={{ color: "black" }}>
+                        Войти
+                      </Link>
+                    </span>
                   )}
                 </div>
                 <div
@@ -106,11 +119,19 @@ function MenuMobile() {
                   onTouchEnd={() => orderHistory()}
                 >
                   <img src={orderIcon} alt="Мои заказы" />
-                  <span>Мои заказы</span>
+                  <span>
+                    <Link to={"/"} style={{ color: "black" }}>
+                      Мои заказы
+                    </Link>
+                  </span>
                 </div>
                 <div className="menu_nav_item" onTouchEnd={() => cooperation()}>
                   <img src={phoneIcon} alt="Сотрудничество" />
-                  <span>Сотрудничество</span>
+                  <span>
+                    <Link to={"/"} style={{ color: "black" }}>
+                      Сотрудничество
+                    </Link>
+                  </span>
                 </div>
               </div>
               <div className="menu_cashback"></div>

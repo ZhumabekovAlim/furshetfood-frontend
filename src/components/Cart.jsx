@@ -29,6 +29,16 @@ import DeliveryIcon from "/Icons/delivery_icon.svg";
 import { ClipLoader } from "react-spinners";
 import CartLoader from "./CartLoader";
 
+export function formatPaymentType(type) {
+  if (type === "cash") {
+    return "наличными";
+  } else if (type === "card" || type === "robokassa") {
+    return "картой";
+  } else {
+    return "";
+  }
+}
+
 const Cart = () => {
   const dispatch = useDispatch();
 
@@ -45,7 +55,7 @@ const Cart = () => {
   const [isCommentOpen, setIsCommentOpen] = useState(false);
   const [orderComment, setOrderComment] = useState("");
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
-  const [paymentType, setPaymentType] = useState("100% предоплата");
+  const [paymentType, setPaymentType] = useState(null);
   const [promocode, setPromocode] = useState("");
   const [promocodeError, setPromocodeError] = useState("");
   const [categories, setCategories] = useState(null);
@@ -56,6 +66,8 @@ const Cart = () => {
   const [loading, setLoading] = useState(false);
   const [cartLoading, setCartLoading] = useState(false);
   const [addressError, setAddressError] = useState("");
+
+  const [detailsError, setDetailsError] = useState("");
 
   function formatPrice(amount) {
     return (
@@ -69,6 +81,7 @@ const Cart = () => {
   const setPaymentTypeFunc = (value) => {
     setIsPaymentOpen(false);
     setPaymentType(value);
+    setDetailsError("");
   };
 
   useEffect(() => {
@@ -84,7 +97,6 @@ const Cart = () => {
       })
       .catch((e) => console.error("Cart/FetchCategories:", e))
       .finally(() => setCartLoading(false));
-    console.log("fetching categories");
   }, []);
 
   useEffect(() => {
@@ -116,16 +128,12 @@ const Cart = () => {
       try {
         const response = await axios.delete(cart);
         dispatch(removeAllFromCart());
-      } catch (error) {
-        console.log("EROR WHILE DELETING USER CART: ", error);
-      }
+      } catch (error) {}
     } else {
       try {
         const response = await axios.delete(cartGuest);
         dispatch(removeAllFromCart());
-      } catch (error) {
-        console.log("EROR WHILE DELETING GUEST CART: ", error);
-      }
+      } catch (error) {}
     }
     setLoading(false);
   };
@@ -172,14 +180,25 @@ const Cart = () => {
   };
 
   const handleOrder = async () => {
-    if (!address) return setAddressError("Введите адрес доставки");
+    // Адрес нужен только если доставка
+    if (deliveryMethod === "delivery" && !address) {
+      return setAddressError("Введите адрес доставки");
+    }
+    setAddressError("");
+
+    if (!paymentType) {
+      return setDetailsError("Выберите способ оплаты");
+    }
+    setDetailsError("");
+
+    // Проверка промокода (если ввели)
     if (promocode) {
       try {
-        const res = await axios.get(`/promos/code/${promocode}`);
+        await axios.get(`/promos/code/${promocode}`);
         setPromocodeError("");
       } catch (error) {
-        console.error("handleOrder:", error);
-        if (error.response && error.response.status === 404) {
+        console.error("handleOrder promo:", error);
+        if (error?.response?.status === 404) {
           setPromocodeError("Введенный вами промокод недействителен.");
         } else {
           setPromocodeError("Ошибка при проверке промокода.");
@@ -188,31 +207,46 @@ const Cart = () => {
       }
     }
 
-    if (isAuthenticated) {
-      if (address) {
-        dispatch(
-          postUserCart({
-            comments: orderComment,
-            payment_type: paymentType,
-            devices,
-            promo: promocode,
-            delivery_method:
-              deliveryMethod === "delivery" ? "Доставка" : "Самовывоз",
-            address,
-            use_bonus_points: userInfo.userBonus_points ? true : false,
-          })
-        ).then((res) => {
-          if (res) {
-            dispatch(closeCart());
-            dispatch(setDisplayModal(true));
-          }
-        });
-      } else {
-        setAddressError("Введите адрес доставки");
-      }
-    } else {
+    // Если не авторизован — открыть логин
+    if (!isAuthenticated) {
       dispatch(closeCart());
       dispatch(openSingInModal());
+      return;
+    }
+
+    // Собираем payload для checkout
+    const payload = {
+      comments: orderComment,
+      payment_type: paymentType, // "robokassa" | "cash" | "card" | null
+      devices,
+      promo: promocode || null,
+      delivery_method: deliveryMethod === "delivery" ? "Доставка" : "Самовывоз",
+      address: deliveryMethod === "delivery" ? address : null,
+      use_bonus_points: !!userInfo?.userBonus_points,
+    };
+
+    try {
+      // ВАЖНО: unwrap чтобы получить именно data или поймать ошибку
+      const data = await dispatch(postUserCart(payload)).unwrap();
+
+      // data теперь ожидается как:
+      // { message, order, payment? }
+      const paymentUrl = data?.payment?.payment_url || data?.order?.payment_url;
+
+      dispatch(closeCart());
+
+      // Если пришла ссылка на оплату — редиректим
+      if (paymentUrl) {
+        window.location.assign(paymentUrl);
+        return;
+      }
+
+      // Иначе обычный успех (cash/card/0 сумма)
+      dispatch(setDisplayModal(true));
+    } catch (error) {
+      console.error("handleOrder checkout:", error);
+      // тут можешь показать toast/ошибку
+      // например: setCheckoutError("Не удалось оформить заказ. Попробуйте ещё раз.");
     }
   };
 
@@ -246,16 +280,12 @@ const Cart = () => {
       try {
         const response = await axios.put(url);
         dispatch(getUserCart());
-      } catch (error) {
-        console.log("Erro while adding item: ", error);
-      }
+      } catch (error) {}
     } else {
       try {
         const response = await axios.put(url);
         dispatch(getGuestCart());
-      } catch (error) {
-        console.log("Erro while adding item: ", error);
-      }
+      } catch (error) {}
     }
   };
 
@@ -266,16 +296,12 @@ const Cart = () => {
       try {
         const response = await axios.delete(url);
         dispatch(getUserCart());
-      } catch (error) {
-        console.log("Erro while removing item: ", error);
-      }
+      } catch (error) {}
     } else {
       try {
         const response = await axios.delete(url);
         dispatch(getGuestCart());
-      } catch (error) {
-        console.log("Erro while removing item: ", error);
-      }
+      } catch (error) {}
     }
   };
 
@@ -601,7 +627,9 @@ const Cart = () => {
                           />
                         </svg>
                       </div>
-                      <div className="option_ttl">{paymentType}</div>
+                      <div className="option_ttl">{`Оплата${
+                        paymentType ? `: ${formatPaymentType(paymentType)}` : ""
+                      }`}</div>
                     </div>
                     <div
                       className="option_arrow"
@@ -621,20 +649,29 @@ const Cart = () => {
                     <div className="order_payment_select">
                       <div
                         className="order_payment_option"
-                        onClick={() => setPaymentTypeFunc("50% предоплата")}
+                        onClick={() => setPaymentTypeFunc("cash")}
                       >
-                        50% предоплата
+                        Наличными
                       </div>
                       <div
                         className="order_payment_option"
-                        onClick={() => setPaymentTypeFunc("100% предоплата")}
+                        onClick={() => setPaymentTypeFunc("robokassa")}
                       >
-                        100% предоплата
+                        Картой
                       </div>
                     </div>
                   )}
                 </div>
               </div>
+
+              {detailsError ? (
+                <p
+                  className="error_message"
+                  style={{ justifyContent: "flex-start" }}
+                >
+                  {detailsError}
+                </p>
+              ) : null}
 
               <div className="detail_total_amount">
                 <div className="order_wrapper">
