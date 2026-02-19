@@ -808,6 +808,19 @@ const Cart = () => {
                   {promocodeError}
                 </p>
               )}
+
+              {deliveryMethod === "delivery" && (
+                <p
+                  style={{
+                    paddingLeft: "10px",
+                    fontSize: "14px",
+                    color: "gray",
+                  }}
+                >
+                  🚚 Стоимость доставки рассчитывается отдельно и не входит в
+                  сумму заказа.
+                </p>
+              )}
             </div>
           </div>
           <div className="cart_bottom">
