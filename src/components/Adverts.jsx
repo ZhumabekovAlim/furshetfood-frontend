@@ -69,6 +69,22 @@ function Adverts() {
               Связаться<span>&nbsp;с нами</span>
             </button>
           </a>
+          <div
+            className="adverts_phones"
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "4px 16px",
+              marginTop: "12px",
+            }}
+          >
+            <a href="tel:+77076496622" style={{ color: "inherit" }}>
+              +7 707 649 6622
+            </a>
+            <a href="tel:+77786496622" style={{ color: "inherit" }}>
+              +7 778 649 6622
+            </a>
+          </div>
           <div className="desc" style={{ marginTop: "1rem" }}>
             {/* <span>Заказы принимаются до 21:00.</span> Доставляем в <br />{" "}
             течение 1,5 часа! Вы можете оплатить заказ <br /> наличными после

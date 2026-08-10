@@ -40,19 +40,6 @@ const Footer = () => {
             <ul style={{ marginTop: "0", paddingLeft: "0" }}>
               <li>
                 <a
-                  href="https://go.2gis.com/i11Ep"
-                  style={{
-                    color: "#000",
-                    fontWeight: "400",
-                    textAlign: "left",
-                  }}
-                  className="center_desc"
-                >
-                  Кенен Азербаев 2 (Заезд сзади дома)
-                </a>
-              </li>
-              <li>
-                <a
                   href="https://go.2gis.com/9fyzJ"
                   style={{
                     color: "#000",
@@ -65,17 +52,25 @@ const Footer = () => {
                 </a>
               </li>
             </ul>
-            {/* <div style={{ width: "100px", height: "100px" }}>
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d504.6206120948882!2d71.50547631512016!3d51.12763915414726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x424583cf6e3365a1%3A0x6836b51765cba2a5!2z0YPQuy4g0JrQtdC90LXQvdCwINCQ0LfQtdGA0LHQsNC10LLQsCAy!5e0!3m2!1sru!2skz!4v1744289786471!5m2!1sru!2skz"
-                width="200"
-                height="100"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
-            </div> */}
+          </div>
+          <div className="footer_subsections">
+            <div className="footer_wrapper_title">Телефоны:</div>
+            <div>
+              <a
+                href="tel:+77076496622"
+                className="work_schedule"
+                style={{ display: "block", color: "inherit" }}
+              >
+                +7 707 649 6622
+              </a>
+              <a
+                href="tel:+77786496622"
+                className="work_schedule"
+                style={{ display: "block", color: "inherit" }}
+              >
+                +7 778 649 6622
+              </a>
+            </div>
           </div>
           <div className="footer_right">
             <a href="#">Бонусная система</a>

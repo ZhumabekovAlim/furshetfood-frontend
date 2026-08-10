@@ -27,6 +27,7 @@ const About = () => {
     `button ${deliveryMethod === currentMethod ? "active" : ""}`;
 
   const phoneNumber = "+77076496622";
+  const phoneNumber2 = "+77786496622";
   const whatsappLink = `https://wa.me/${phoneNumber}`;
 
   return (
@@ -64,6 +65,22 @@ const About = () => {
             <a href={isMobile ? `tel:${phoneNumber}` : whatsappLink}>
               <button className="button contact_button">Связаться</button>
             </a>
+            <div
+              className="corporate_phones"
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "4px 16px",
+                marginTop: "10px",
+              }}
+            >
+              <a href={`tel:${phoneNumber}`} style={{ color: "inherit" }}>
+                +7 707 649 6622
+              </a>
+              <a href={`tel:${phoneNumber2}`} style={{ color: "inherit" }}>
+                +7 778 649 6622
+              </a>
+            </div>
           </div>
         </div>
       )}

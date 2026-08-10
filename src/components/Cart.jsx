@@ -649,12 +649,6 @@ const Cart = () => {
                     <div className="order_payment_select">
                       <div
                         className="order_payment_option"
-                        onClick={() => setPaymentTypeFunc("cash")}
-                      >
-                        Наличными
-                      </div>
-                      <div
-                        className="order_payment_option"
                         onClick={() => setPaymentTypeFunc("robokassa")}
                       >
                         Картой
