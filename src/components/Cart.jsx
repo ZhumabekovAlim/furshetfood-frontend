@@ -759,7 +759,6 @@ const Cart = () => {
                       Выберите адрес
                     </option>
                     <option value="Кошкарбаева 54а">Кошкарбаева 54а</option>
-                    <option value="Кенен Азербаев 2">Кенен Азербаев 2</option>
                   </select>
                 )}
 

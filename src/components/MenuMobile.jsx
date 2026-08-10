@@ -156,10 +156,10 @@ function MenuMobile() {
             </div>
           )}
           <div className="menu_bottom">
-            <div className="adress">Кенен Азербаев 2</div>
             <div className="adress">Кошкарбаева 54а</div>
             <div className="schedule">Ежедневно: 08:00 - 21:00</div>
             <div className="phone">+7 (707) 649 66 22</div>
+            <div className="phone">+7 (778) 649 66 22</div>
             <div className="contact_us">
               <a href="">
                 <img src={instagramIcon} alt="Иконка инстаграмма" />
