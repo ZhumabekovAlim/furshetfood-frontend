@@ -13,7 +13,7 @@ const Footer = () => {
             <div className="footer_wrapper_title">График работы:</div>
             <div>
               <div className="work_schedule">Домашние полуфабрикаты Астана</div>
-              <div className="work_schedule">Ежедневно 08:00 - 21:00</div>
+              <div className="work_schedule">Ежедневно 08:00 - 00:00</div>
               <a
                 href="/public_offer"
                 target="_blank"

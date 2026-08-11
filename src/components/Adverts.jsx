@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import AdvertasmentBanner from "/images/landing-phone.svg";
-import Advertisement from "/images/landing-phone-ios.png";
+import AdvertasmentBanner from "/images/phone1.jpg";
+import Advertisement from "/images/phone1.jpg";
 import WhatsappIcon from "/Icons/whatsapp.svg";
 import InstagramIcon from "/Icons/instagram.svg";
 import TikTokIcon from "/Icons/tiktok.svg";
@@ -90,9 +90,9 @@ function Adverts() {
             течение 1,5 часа! Вы можете оплатить заказ <br /> наличными после
             получения, либо переводом через <br /> Kaspi. */}
             <ul style={{ textAlign: "left", paddingLeft: "1.2rem" }}>
-              <li>Заказы принимаются до 21:00.</li>
+              <li>Заказы принимаются до 00:00.</li>
               <li>Доставляем в течение 1,5 часа!</li>
-              <li>Предоплата 50% или 100%</li>
+              <li>Оплата 100%</li>
             </ul>
           </div>
         </div>
