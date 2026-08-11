@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import AdvertasmentBanner from "/images/phone1.jpg";
-import Advertisement from "/images/phone1.jpg";
+import AdvertasmentBanner from "/images/phone1.png";
+import Advertisement from "/images/phone1.png";
 import WhatsappIcon from "/Icons/whatsapp.svg";
 import InstagramIcon from "/Icons/instagram.svg";
 import TikTokIcon from "/Icons/tiktok.svg";
