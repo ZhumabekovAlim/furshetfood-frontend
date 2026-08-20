@@ -15,9 +15,32 @@ import { useDispatch } from "react-redux";
 import { getUserFunc, validateSessionFunc } from "./features/authSlice";
 import { getGuestCart, getUserCart } from "./features/cartSlice";
 import PublicOffer from "./pages/PublicOffer";
+import axios from "./axios";
 
 function App() {
   const dispatch = useDispatch();
+
+  // Трекинг посещения сайта (один раз за сессию браузера)
+  useEffect(() => {
+    try {
+      let vid = localStorage.getItem("visitor_id");
+      if (!vid) {
+        vid =
+          (window.crypto && window.crypto.randomUUID
+            ? window.crypto.randomUUID()
+            : String(Date.now()) + Math.random().toString(16).slice(2));
+        localStorage.setItem("visitor_id", vid);
+      }
+      if (!sessionStorage.getItem("visit_tracked")) {
+        axios
+          .post("/track/visit", { visitor_id: vid, path: window.location.pathname })
+          .catch(() => {});
+        sessionStorage.setItem("visit_tracked", "1");
+      }
+    } catch (e) {
+      /* ignore tracking errors */
+    }
+  }, []);
 
   useEffect(() => {
     const initAuthAndCart = async () => {
