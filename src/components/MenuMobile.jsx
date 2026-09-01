@@ -156,7 +156,7 @@ function MenuMobile() {
             </div>
           )}
           <div className="menu_bottom">
-            <div className="adress">Кошкарбаева 54а</div>
+            <div className="adress">Р.Кошкарбаева 54А</div>
             <div className="schedule">Ежедневно: 08:00 - 00:00</div>
             <div className="phone">+7 (707) 649 66 22</div>
             <div className="phone">+7 (778) 649 66 22</div>

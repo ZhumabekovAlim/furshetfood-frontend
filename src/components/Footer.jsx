@@ -48,7 +48,7 @@ const Footer = () => {
                   }}
                   className="center_desc"
                 >
-                  Кошкарбаева 54а
+                  Р.Кошкарбаева 54А
                 </a>
               </li>
             </ul>
