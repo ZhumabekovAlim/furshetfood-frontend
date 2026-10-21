@@ -4,7 +4,7 @@ import "../styles/FoodInfoModal.css";
 import axios from "../axios";
 import { cart, cartGuest } from "../constants/URLs";
 
-import { getUserCart, getGuestCart } from "../features/cartSlice";
+import { getUserCart, getGuestCart, openCart } from "../features/cartSlice";
 
 import { foodItems } from "../constants/URLs";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +16,9 @@ function FoodInfoModal() {
   const [dataInfo, setDataInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  // Выбранные варианты модификаторов: { [groupId]: optionId }
+  const [selectedOptions, setSelectedOptions] = useState({});
+  const [modifierError, setModifierError] = useState("");
 
   const item_id = useSelector((state) => state.foodInfo.itemId);
 
@@ -25,7 +28,17 @@ function FoodInfoModal() {
 
   const dispatch = useDispatch();
 
-  const handleAddToCart = async (dataId, item_type) => {
+  // Приводит выбор к формату API: [{group_id, option_id}]
+  const buildSelectedOptions = () =>
+    Object.entries(selectedOptions)
+      .filter(([, optionId]) => Boolean(optionId))
+      .map(([groupId, optionId]) => ({
+        group_id: Number(groupId),
+        option_id: Number(optionId),
+      }));
+
+  const handleAddToCart = async (dataId, item_type, closeAfter = false) => {
+    setModifierError("");
     setLoading(true);
 
     const addItem = {
@@ -34,10 +47,17 @@ function FoodInfoModal() {
       quantity: 1,
     };
 
+    const chosen = buildSelectedOptions();
+    if (chosen.length > 0) {
+      addItem.selected_options = chosen;
+    }
+
     if (isAuthenticated) {
       try {
         const response = await axios.post(cart, addItem);
         dispatch(getUserCart());
+        dispatch(openCart());
+        if (closeAfter) dispatch(closeFood());
       } catch (error) {
         console.error("Error adding item to user cart: ", error);
         alert(
@@ -50,6 +70,8 @@ function FoodInfoModal() {
       try {
         const response = await axios.post(cartGuest, addItem);
         dispatch(getGuestCart());
+        dispatch(openCart());
+        if (closeAfter) dispatch(closeFood());
       } catch (error) {
         console.error("Error adding item to guest cart: ", error);
         alert(
@@ -78,6 +100,10 @@ function FoodInfoModal() {
   };
 
   useEffect(() => {
+    // При смене позиции выбор сбрасывается.
+    setSelectedOptions({});
+    setModifierError("");
+
     axios
       .get(foodItems)
       .then((response) => {
@@ -93,6 +119,49 @@ function FoodInfoModal() {
 
   if (loading) return <LoadingModal />;
   if (error) return <div>Ошибка загрузки товара</div>;
+  if (!dataInfo) return null;
+
+  // Показываем только доступные варианты; пустые группы скрываем.
+  const modifierGroups = (dataInfo.modifier_groups || [])
+    .map((group) => ({
+      ...group,
+      options: (group.options || []).filter((option) => option.is_available),
+    }))
+    .filter((group) => group.options.length > 0);
+
+  const hasModifiers = modifierGroups.length > 0;
+
+  const missingRequired = modifierGroups.filter(
+    (group) => group.is_required && !selectedOptions[group.id]
+  );
+  const canAddToCart = missingRequired.length === 0;
+
+  const basePrice = Number(dataInfo.discount_price || dataInfo.regular_price || 0);
+  const optionsDelta = modifierGroups.reduce((sum, group) => {
+    const chosen = group.options.find(
+      (option) => option.id === selectedOptions[group.id]
+    );
+    return sum + (chosen ? Number(chosen.price_delta) : 0);
+  }, 0);
+  const currentPrice = basePrice + optionsDelta;
+
+  const handleSelectOption = (groupId, optionId) => {
+    setModifierError("");
+    setSelectedOptions((prev) => ({ ...prev, [groupId]: optionId }));
+  };
+
+  const handleAddClick = () => {
+    if (!canAddToCart) {
+      setModifierError(
+        "Выберите вариант: " +
+          missingRequired.map((group) => group.name).join(", ")
+      );
+      return;
+    }
+    // У позиций с модификаторами закрываем модалку после добавления
+    // (счётчик ± тут не показывается, иначе окно «зависает» открытым).
+    handleAddToCart(dataInfo.id, dataInfo.item_type, hasModifiers);
+  };
 
   return (
     <div className="food_info">
@@ -130,6 +199,58 @@ function FoodInfoModal() {
                 </React.Fragment>
               ))}
             </div>
+            {hasModifiers && (
+              <div className="food_info_modifiers">
+                {modifierGroups.map((group) => (
+                  <div className="modifier_group" key={group.id}>
+                    <div className="modifier_group_title">
+                      {group.name}
+                      {group.is_required && (
+                        <span className="modifier_required">
+                          {" "}
+                          — выберите один вариант
+                        </span>
+                      )}
+                    </div>
+                    <div className="modifier_options">
+                      {group.options.map((option) => (
+                        <label
+                          key={option.id}
+                          className={
+                            "modifier_option" +
+                            (selectedOptions[group.id] === option.id
+                              ? " selected"
+                              : "")
+                          }
+                        >
+                          <input
+                            type="radio"
+                            name={`modifier_group_${group.id}`}
+                            checked={selectedOptions[group.id] === option.id}
+                            onChange={() =>
+                              handleSelectOption(group.id, option.id)
+                            }
+                          />
+                          <span className="modifier_option_name">
+                            {option.name}
+                          </span>
+                          {Number(option.price_delta) !== 0 && (
+                            <span className="modifier_option_price">
+                              {Number(option.price_delta) > 0 ? "+" : "−"}
+                              {Math.round(Math.abs(Number(option.price_delta)))}{" "}
+                              ₸
+                            </span>
+                          )}
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+                {modifierError && (
+                  <div className="modifier_error">{modifierError}</div>
+                )}
+              </div>
+            )}
             <div
               style={{
                 display: "flex",
@@ -141,20 +262,16 @@ function FoodInfoModal() {
               {dataInfo?.discount_price &&
                 dataInfo?.discount_percentage !== "0.00" && (
                   <span className="product_item_price-discount">
-                    {Math.round(dataInfo.regular_price)} ₸
+                    {Math.round(Number(dataInfo.regular_price) + optionsDelta)}{" "}
+                    ₸
                   </span>
                 )}
-              {dataInfo?.discount_price ? (
-                <div className="food_info_price">
-                  {Math.round(dataInfo.discount_price)} ₸
-                </div>
-              ) : (
-                <div className="food_info_price">
-                  {Math.round(dataInfo.regular_price)} тг
-                </div>
-              )}
+              <div className="food_info_price">
+                {Math.round(currentPrice)} ₸
+              </div>
             </div>
-            {cartItems.some((item) => item.item_id === dataInfo.id) ? (
+            {!hasModifiers &&
+            cartItems.some((item) => item.item_id === dataInfo.id) ? (
               <div
                 className="button_add_to_basket"
                 style={{ justifyContent: "space-between" }}
@@ -223,8 +340,16 @@ function FoodInfoModal() {
               </div>
             ) : (
               <div
-                className="button_add_to_basket"
-                onClick={() => handleAddToCart(dataInfo.id, dataInfo.item_type)}
+                className={
+                  "button_add_to_basket" + (canAddToCart ? "" : " disabled")
+                }
+                onClick={handleAddClick}
+                title={
+                  canAddToCart
+                    ? ""
+                    : "Сначала выберите: " +
+                      missingRequired.map((group) => group.name).join(", ")
+                }
               >
                 Добавить в корзину{" "}
               </div>

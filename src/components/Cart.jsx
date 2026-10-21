@@ -12,6 +12,7 @@ import {
   setDisplayModal,
 } from "../features/cartSlice";
 import { openSingInModal } from "../features/singInSlice";
+import { openFood } from "../features/foodInfo";
 
 import { getUserCart, getGuestCart } from "../features/cartSlice";
 import { setMethod } from "../features/cartSlice";
@@ -192,14 +193,19 @@ const Cart = () => {
     setDetailsError("");
 
     // Проверка промокода (если ввели)
-    if (promocode) {
+    const promo = promocode.trim();
+    if (promo) {
       try {
-        await axios.get(`/promos/code/${promocode}`);
+        await axios.get(`/promos/code/${encodeURIComponent(promo)}`);
         setPromocodeError("");
       } catch (error) {
         console.error("handleOrder promo:", error);
-        if (error?.response?.status === 404) {
+        const status = error?.response?.status;
+        if (status === 404) {
           setPromocodeError("Введенный вами промокод недействителен.");
+        } else if (status === 400 && error?.response?.data?.message) {
+          // Сервер объясняет причину: истёк, лимит исчерпан, уже использован
+          setPromocodeError(error.response.data.message);
         } else {
           setPromocodeError("Ошибка при проверке промокода.");
         }
@@ -219,10 +225,11 @@ const Cart = () => {
       comments: orderComment,
       payment_type: paymentType, // "robokassa" | "cash" | "card" | null
       devices,
-      promo: promocode || null,
+      promo: promo || null,
       delivery_method: deliveryMethod === "delivery" ? "Доставка" : "Самовывоз",
       address: deliveryMethod === "delivery" ? address : null,
-      use_bonus_points: !!userInfo?.userBonus_points,
+      // Промокод и бонусы не суммируются: при промокоде бонусы не списываем
+      use_bonus_points: promo ? false : !!userInfo?.userBonus_points,
     };
 
     try {
@@ -360,9 +367,11 @@ const Cart = () => {
                   </div>
                 ) : cartItems && cartItems.length ? (
                   cartItems.map((item) => (
+                    // Одна позиция с разным выбором вариантов = разные строки,
+                    // поэтому ключом служит идентификатор строки корзины.
                     <CartAddedItem
-                      key={item.item_id}
-                      itmeKey={item.item_id}
+                      key={item.line_id != null ? item.line_id : item.item_id}
+                      itmeKey={item.line_id != null ? item.line_id : item.item_id}
                       item={item}
                     />
                   ))
@@ -381,9 +390,19 @@ const Cart = () => {
                         <div
                           className="line_item"
                           key={item.id}
-                          onClick={() =>
-                            handleAddToCart(item.id, item.item_type)
-                          }
+                          onClick={() => {
+                            // Позицию с вариантами выбора добавляем
+                            // только через карточку товара.
+                            if (
+                              item.has_modifiers ||
+                              (item.modifier_groups &&
+                                item.modifier_groups.length > 0)
+                            ) {
+                              dispatch(openFood({ foodId: item.id }));
+                              return;
+                            }
+                            handleAddToCart(item.id, item.item_type);
+                          }}
                         >
                           <div className="item_img">
                             <img src={item.image_path} alt={item.name} />

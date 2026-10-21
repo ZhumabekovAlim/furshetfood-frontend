@@ -13,9 +13,24 @@ import { MoonLoader } from "react-spinners";
 const CartAddedItem = ({ itmeKey, item }) => {
   const dispatch = useDispatch();
 
-  const { item_id, quantity, item_type } = item;
+  const {
+    item_id,
+    quantity,
+    item_type,
+    id: cartRowId,
+    line_id,
+    selected_options: selectedOptions,
+  } = item;
 
   const { isAuthenticated } = useSelector((state) => state.auth);
+
+  // У позиции с модификаторами одна и та же позиция может лежать
+  // несколькими строками, поэтому адресуем конкретную строку корзины.
+  const lineUrl = isAuthenticated
+    ? cartRowId
+      ? `${cart}/line/${cartRowId}`
+      : `${cart}/${item_id}`
+    : `${cartGuest}/${line_id != null ? line_id : item_id}`;
 
   const [detail, setDetail] = useState(null);
   //   const [quantityItem, setQuantityItem] = useState(quantity);
@@ -37,7 +52,7 @@ const CartAddedItem = ({ itmeKey, item }) => {
   }, [item_id]);
 
   const cartItemPlus = async () => {
-    const url = `${isAuthenticated ? cart : cartGuest}/${item_id}`;
+    const url = lineUrl;
 
     if (isAuthenticated) {
       try {
@@ -53,7 +68,7 @@ const CartAddedItem = ({ itmeKey, item }) => {
   };
 
   const cartItemMinus = async () => {
-    const url = `${isAuthenticated ? cart : cartGuest}/${item_id}`;
+    const url = lineUrl;
 
     if (isAuthenticated) {
       try {
@@ -83,7 +98,28 @@ const CartAddedItem = ({ itmeKey, item }) => {
       <img src={detail.image_path} alt="plov" />
       <div className="cart_item_info">
         <div className="cart_item_top">
-          <p className="cart_item_title">{detail.name}</p>
+          <div>
+            <p className="cart_item_title">{detail.name}</p>
+            {selectedOptions && selectedOptions.length > 0 && (
+              <div className="cart_item_options">
+                {selectedOptions.map((option) => (
+                  <div
+                    className="cart_item_option"
+                    key={`${option.group_id}-${option.option_id}`}
+                  >
+                    {option.group_name}: {option.option_name}
+                    {Number(option.price_delta) !== 0 && (
+                      <>
+                        {" "}
+                        ({Number(option.price_delta) > 0 ? "+" : "−"}
+                        {Math.round(Math.abs(Number(option.price_delta)))} ₸)
+                      </>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
           <div className="cart_item_count">
             <div className="item_count_minus" onClick={() => cartItemMinus()}>
               <svg
@@ -119,7 +155,10 @@ const CartAddedItem = ({ itmeKey, item }) => {
         <div className="cart_item_desc">
           <div className="cart_item_price">
             {Math.round(
-              (detail.discount_price || detail.regular_price) * quantity
+              (item.price != null
+                ? Number(item.price)
+                : Number(detail.discount_price || detail.regular_price)) *
+                quantity
             )}{" "}
             ₸
           </div>

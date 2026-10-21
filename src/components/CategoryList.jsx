@@ -217,9 +217,18 @@ const CategoryList = ({ url, onActiveCategoryChange }) => {
               <h2>{item.name}</h2>
               <section className="product_category_block">
                 {item.items.map((product) => {
-                  const isInCart = cartItems.some(
-                    (cartItem) => cartItem.item_id === product.id
+                  // У позиции есть варианты выбора — добавить её можно
+                  // только из карточки, где клиент делает выбор.
+                  const hasModifiers = Boolean(
+                    product.has_modifiers ||
+                      (product.modifier_groups &&
+                        product.modifier_groups.length > 0)
                   );
+                  const isInCart =
+                    !hasModifiers &&
+                    cartItems.some(
+                      (cartItem) => cartItem.item_id === product.id
+                    );
                   return (
                     <div
                       onClick={() => dispatch(openFood({ foodId: product.id }))}
@@ -306,6 +315,10 @@ const CategoryList = ({ url, onActiveCategoryChange }) => {
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
+                                if (hasModifiers) {
+                                  dispatch(openFood({ foodId: product.id }));
+                                  return;
+                                }
                                 handleAddToCart(product.id, product.item_type);
                               }}
                               key={product.id}

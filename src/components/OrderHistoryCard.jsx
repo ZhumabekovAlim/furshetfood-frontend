@@ -30,6 +30,18 @@ function OrderHistoryCard({ userHistory }) {
                       <div className="food-left">
                         <div className="food_mddl" style={{width: '150px'}}>
                           <div className="food_ttl">{item?.item?.name}</div>
+                          {item?.modifiers && item.modifiers.length > 0 && (
+                            <div className="cart_item_options">
+                              {item.modifiers.map((modifier) => (
+                                <div
+                                  className="cart_item_option"
+                                  key={modifier.id}
+                                >
+                                  {modifier.group_name}: {modifier.option_name}
+                                </div>
+                              ))}
+                            </div>
+                          )}
                         </div>
                         <div className="food_mddl" style={{width: '50px'}}>
                           <div className="food_ttl">{item.quantity}</div>

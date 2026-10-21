@@ -40,7 +40,11 @@ export const postUserCart = createAsyncThunk(
       const response = await axios.post(orders, userCart);
       return response.data;
     } catch (error) {
-      toast.error("Ошибка! Сделайте заказ по-позже", {
+      // Понятные ошибки оформления (например, по промокоду) показываем как есть
+      const serverMessage = error?.response?.data?.message;
+      const isReadable =
+        error?.response?.status === 422 && /[а-яё]/i.test(serverMessage || "");
+      toast.error(isReadable ? serverMessage : "Ошибка! Сделайте заказ по-позже", {
         position: "top-center",
         autoClose: 5000,
         draggable: true,
@@ -72,6 +76,9 @@ const cartSlice = createSlice({
     },
     closeCart: (state) => {
       state.isCartOpen = false;
+    },
+    openCart: (state) => {
+      state.isCartOpen = true;
     },
     toggleCart: (state) => {
       state.isCartOpen = !state.isCartOpen;
@@ -130,6 +137,7 @@ export const selectTotalQuantity = createSelector(selectCartItems, (items) =>
 export const {
   setMethod,
   closeCart,
+  openCart,
   toggleCart,
   addToCart,
   removeAllFromCart,
